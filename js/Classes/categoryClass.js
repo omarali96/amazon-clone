@@ -1,9 +1,9 @@
-class category{
+export class Category{
     #name;
     #image;
     #productCount; 
     #categoryId;
-    static categories=[];
+    static #categories=[];
     constructor(name, image, productCount, categoryId){
         this.#name = name;
         this.#image = image;

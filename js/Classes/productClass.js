@@ -1,4 +1,4 @@
-class Product{
+export class Product{
     #name;
     #image;
     #price;
