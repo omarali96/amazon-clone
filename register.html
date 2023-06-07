@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Shop | register Page</title>
+    <link rel="stylesheet" href="CSSS/main.css">
+    <link rel="stylesheet" href="CSSS/Login.css">
+    <link rel="stylesheet" href="CSSS/register.css">
+    <link rel="stylesheet" href="CSSS/all.min.css">
+    <link rel="stylesheet" href="CSSS/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/2f2dd22c7b.js" crossorigin="anonymous"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@300&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100&family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="imgs/1000_F_167085639_VZXKHZ4u0N6joMpoZMu9hDzO9HTFCynX.jpg" type="x-icon">
+</head>
+
+<body>
+
+    <header>
+        <div class="left-sec">
+            <a href="index.html">
+                <span class="m">MULTI</span><span class="s">SHOP</span>
+            </a>
+        </div>
+        <div class="right-sec">
+            <li><a href="login.html">Sign in</a></li>
+            <li><a href="register.html">Sign up</a></li>
+        </div>
+    </header>
+    <section class="section-form">
+        <h2>Sign Up..</h2>
+        <form action="">
+            <input type="text" placeholder="Enter Username.." class="User" id="userName">
+            <input type="email" placeholder="Enter E-mail.." class="mail" id="Email">
+            <input type="password" placeholder="Enter Password.." class="Pass" id="passWord">
+            <span id="toggleBtn"><i class="fa-solid fa-eye" id="eye"></i></span>
+            <input type="submit" value="Sign Up" class="Sin" id="sup">
+        </form>
+        <div class="validation">
+            <ul>
+                <li id="lower">At least one lowercase charachter</li>
+                <li id="upper">At least one uppercase charachter</li>
+                <li id="number">At least one number</li>
+                <li id="special">At least one special charachter</li>
+                <li id="length">At least 8 charachters</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <script src="js/access/register.js"></script>
+</body>
+
+</html>

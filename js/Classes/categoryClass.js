@@ -1,21 +1,23 @@
-class category {
-  #name;
-  #image;
-  #productCount;
-  #categoryId;
-  static #categories = [];
-  constructor(name, image, productCount, categoryId) {
-    this.#name = name;
-    this.#image = image;
-    this.#productCount = productCount;
-    this.#categoryId = categoryId;
-  }
-  get name() {
-    return this.#name;
-  }
-  get image() {
-    return this.#image;
-  }
+
+export class Category{
+    #name;
+    #image;
+    #productCount; 
+    #categoryId;
+    static #categories=[];
+    constructor(name, image, productCount, categoryId){
+        this.#name = name;
+        this.#image = image;
+        this.#productCount = productCount;
+        this.#categoryId = categoryId;
+    }
+    get name(){
+        return this.#name;
+    }
+    get image(){
+        return this.#image;
+    }
+
 
   get productCount() {
     return this.#productCount;
