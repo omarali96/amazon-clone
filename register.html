@@ -36,13 +36,18 @@
     <section class="section-form">
         <h2>Sign Up..</h2>
         <form action="">
-            <input type="text" placeholder="Enter Username.." class="User" id="userName">
+            <input type="text" placeholder="Enter firstName.." class="User" id="firstName">
+            <p id="firstNameError"></p>
+            <input type="text" placeholder="Enter lastName.." class="User" id="lastName">
+            <p id="lastNameError"></p>
             <input type="email" placeholder="Enter E-mail.." class="mail" id="Email">
+            <p id="emailError"></p>
             <input type="password" placeholder="Enter Password.." class="Pass" id="passWord">
+            <p id="passError"></p>
             <span id="toggleBtn"><i class="fa-solid fa-eye" id="eye"></i></span>
             <input type="submit" value="Sign Up" class="Sin" id="sup">
         </form>
-        <div class="validation">
+        <!-- <div class="validation">
             <ul>
                 <li id="lower">At least one lowercase charachter</li>
                 <li id="upper">At least one uppercase charachter</li>
@@ -50,11 +55,11 @@
                 <li id="special">At least one special charachter</li>
                 <li id="length">At least 8 charachters</li>
             </ul>
-        </div>
+        </div> -->
     </section>
 
 
-    <script src="js/access/register.js"></script>
+    <script src="js/access/register.js" type="module"></script>
 </body>
 
 </html>
