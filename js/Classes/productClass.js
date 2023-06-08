@@ -200,10 +200,11 @@ export class Product{
         localStorage.loveCount = JSON.stringify(loveCount);
         let loveBtn = document.getElementById("love-btn");
         loveBtn.disabled = true;
+
         loveBtn.addEventListener("click",()=>{
             loveBtn.disabled = false;
             loveCount--;
-            localStorage.loveCount = loveCount;
+            localStorage.loveCount = JSON.stringify(loveCount);
         })
     }
 
