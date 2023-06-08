@@ -123,21 +123,21 @@ export class Product{
     }
 
     displayProductCart(object,index){
-        const productCart = new Product(object);
+       
      //  <!-- product Cart element -->
      return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
      <div class="product-item bg-light mb-4">
        <div class="product-img position-relative overflow-hidden">
-         <img class="img-fluid w-100" src="${this.image}" alt="" />
+         <img class="img-fluid w-100" src="${object.image}" alt="" />
          <div class="product-action">
            <a
              class="btn btn-outline-dark btn-square"
              href="#"
-             onclick="${addToCart()}"
+             onclick="${object.addToCart()}"
              ><i class="fa fa-shopping-cart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
-             onclick="${loveCount()}"><i class="far fa-heart"></i
+             onclick="${object.loveCount()}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
              ><i class="fa fa-sync-alt"></i
@@ -149,19 +149,19 @@ export class Product{
        </div>
        <div class="text-center py-4">
          <a class="h6 text-decoration-none text-truncate" href=""
-           >${this.name}</a
+           >${object.name}</a
          >
          <div
            class="d-flex align-items-center justify-content-center mt-2"
          >
-           <h5>${productCart.discountedPrice}</h5>
-           <h6 class="text-muted ml-2"><del>${this.price}</del></h6>
+           <h5>${object.discountedPrice}</h5>
+           <h6 class="text-muted ml-2"><del>${object.price}</del></h6>
          </div>
          <div
            class="d-flex align-items-center justify-content-center mb-1"
          >
-           ${displayRating(this.rating)}
-           <small>(${this.ratingCount})</small>
+           ${displayRating(object.rating)}
+           <small>(${object.ratingCount})</small>
          </div>
        </div>
      </div>

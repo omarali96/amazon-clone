@@ -1,6 +1,7 @@
 "use strict";
 import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
+import { Product } from "../Classes/productClass.js";
 const APIs = {
   categories: "http://localhost:5000/api/categories/",
   featProducts: "http://localhost:5000/api/products/getFeatured",
