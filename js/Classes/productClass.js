@@ -139,7 +139,7 @@ export class Product{
              ><i class="fa fa-shopping-cart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
-             onclick="${this.loveCount()}"><i class="far fa-heart"></i
+             onclick="${this.loveCount(index)}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
              ><i class="fa fa-sync-alt"></i
@@ -162,7 +162,7 @@ export class Product{
          <div
            class="d-flex align-items-center justify-content-center mb-1"
          >
-           ${displayRating(this.#rating)}
+         ${displayRating(this.#rating)}
            <small>(${this.#ratingCount})</small>
          </div>
        </div>
@@ -170,45 +170,44 @@ export class Product{
    </div> `
 
     }
-
+   
 
     displayRating(rating){
-    //     let ratingCount=parseFloat(rating);
-    //     let displayStars = "";
-    //     if(ratingCount === 0){
-    //         displayStars =
-    //         `<small class="far fa-star text-primary mr-1"></small>
-    //         <small class="far fa-star text-primary mr-1"></small>
-    //         <small class="far fa-star text-primary mr-1"></small>
-    //         <small class="far fa-star text-primary mr-1"></small>
-    //         <small class="far fa-star text-primary mr-1"></small>`
-    //     }else{
-    //         for(let i=0;i<Math.trunc(ratingCount);i++){
-    //             displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
-    //         }
-    //         if(ratingCount%1!==0){{
-    //             displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
-    //         }
-    //         for(let i=0;i<5-Math.trunc(ratingCount);i++){
-    //             displayStars += `<small class="far fa-star text-primary mr-1"></small>`
-    //         }
-    //     }
-    // }
-    return true;
+        let ratingCount=parseFloat(rating);
+        let displayStars = "";
+        if(ratingCount === 0){
+            displayStars =
+            `<small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>`
+        }else{
+            for(let i=0;i<Math.trunc(ratingCount);i++){
+                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
+            }
+            if(ratingCount%1!==0){{
+                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
+            }
+            for(let i=0;i<5-Math.trunc(ratingCount);i++){
+                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
+            }
+        }
+    }
 
 }
     loveCount(index){
-        // let loveCount =parseInt(localStorage.loveCount);
-        // loveCount++;
-        // localStorage.loveCount = JSON.stringify(loveCount);
-        // let loveBtn = document.getElementById(`love-btn${index}`);
-        // loveBtn.disabled = true;
+        let loveCount =parseInt(localStorage.loveCount);
+        loveCount++;
+        localStorage.loveCount = JSON.stringify(loveCount);
+        let loveBtn = document.getElementById(`love-btn${index}`);
+        loveBtn.setAtribute("","disabled")
 
-        // loveBtn.addEventListener("click",()=>{
-        //     loveBtn.disabled = false;
-        //     loveCount--;
-        //     localStorage.loveCount = JSON.stringify(loveCount);
-        // })
+        loveBtn.addEventListener("click",()=>{
+            loveBtn.disabled = false;
+            loveCount--;
+            localStorage.loveCount = JSON.stringify(loveCount);
+        })
     }
 
 

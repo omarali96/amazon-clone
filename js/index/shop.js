@@ -15,8 +15,8 @@ for (const product of featProducts.data) {
     let objProduct = new Product(product); 
     producterContainer.push(objProduct);
 }
-
-console.log(producterContainer[0].displayProductCart());
+console.log(producterContainer[0]);
+console.log(producterContainer[0].displayProductCart(0));
 let parent = document.getElementById("parent");
 //console.log(producterContainer);
 // for (pro of producterContainer) {
