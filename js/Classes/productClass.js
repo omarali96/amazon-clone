@@ -16,12 +16,12 @@ export class Product{
         this.#name = object.name;
         this.#image = object.image;
         this.#price = object.price;
-        this.#categoryId = object.categoryId;
+        this.#categoryId = object.category_id;
         this.#discount = object.discount;
         this.#rating = object.rating;
-        this.#ratingCount = object.ratingCount;
-        this.#isFeatured = object.isFeatured;
-        this.#isRecent = object.isRecent;
+        this.#ratingCount = object.rating_count;
+        this.#isFeatured = object.is_featured;
+        this.#isRecent = object.is_recent;
         this.#color = object.color;
         this.#size = object.size;
         //
@@ -124,6 +124,47 @@ export class Product{
         this.#discountedPrice = this.price - (this.discount * this.price);
     }
 
+    loveCount(){
+        let loveCount =parseInt(localStorage.loveCount);
+        loveCount++;
+        localStorage.loveCount = JSON.stringify(loveCount);
+        // let loveBtn = document.getElementById(`love-btn${index}`);
+        // loveBtn.setAtribute("","disabled");
+
+        // loveBtn.addEventListener("click",()=>{
+        //     loveBtn.disabled = false;
+        //     loveCount--;
+        //     localStorage.loveCount = JSON.stringify(loveCount);
+        // })
+    }
+
+
+    displayRating(){
+        let ratingCount=parseFloat(this.#rating);
+        let displayStars = "";
+        if(ratingCount === 0){
+            displayStars =
+            `<small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>`
+        }else{
+            for(let i=0;i<Math.trunc(ratingCount);i++){
+                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
+            }
+            if(ratingCount%1!==0){{
+                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
+            }
+            for(let i=0;i<5-Math.ceil(ratingCount);i++){
+                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
+            }
+        }
+    }
+    return displayStars;
+
+}
+
     displayProductCart(index){
        
      //  <!-- product Cart element -->
@@ -139,7 +180,7 @@ export class Product{
              ><i class="fa fa-shopping-cart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
-             onclick="${this.loveCount(index)}"><i class="far fa-heart"></i
+             onclick="${this.loveCount()}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
              ><i class="fa fa-sync-alt"></i
@@ -162,7 +203,7 @@ export class Product{
          <div
            class="d-flex align-items-center justify-content-center mb-1"
          >
-         ${displayRating(this.#rating)}
+         ${this.displayRating()}
            <small>(${this.#ratingCount})</small>
          </div>
        </div>
@@ -172,44 +213,8 @@ export class Product{
     }
    
 
-    displayRating(rating){
-        let ratingCount=parseFloat(rating);
-        let displayStars = "";
-        if(ratingCount === 0){
-            displayStars =
-            `<small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>`
-        }else{
-            for(let i=0;i<Math.trunc(ratingCount);i++){
-                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
-            }
-            if(ratingCount%1!==0){{
-                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
-            }
-            for(let i=0;i<5-Math.trunc(ratingCount);i++){
-                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
-            }
-        }
-    }
-
-}
-    loveCount(index){
-        let loveCount =parseInt(localStorage.loveCount);
-        loveCount++;
-        localStorage.loveCount = JSON.stringify(loveCount);
-        let loveBtn = document.getElementById(`love-btn${index}`);
-        loveBtn.setAtribute("","disabled")
-
-        loveBtn.addEventListener("click",()=>{
-            loveBtn.disabled = false;
-            loveCount--;
-            localStorage.loveCount = JSON.stringify(loveCount);
-        })
-    }
-
+   
+    
 
     addToCart(){
         
