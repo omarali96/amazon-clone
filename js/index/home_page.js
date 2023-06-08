@@ -53,6 +53,6 @@ fetchCategories()
 })(); // Get json data (recent products) from APIs
 
 (function(){
-    localStorage.setItem ('loveCount', 0);
+    localStorage.setItem ('loveCount',JSON.stringify(0));
 })();
 
