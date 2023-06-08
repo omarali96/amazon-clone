@@ -122,52 +122,76 @@ export class Product{
         this.#discountedPrice = this.price - (this.discount * this.price);
     }
 
+    displayProductCart(object){
+        const productCart = new Product(object);
+     //  <!-- product Cart element -->
+     return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+     <div class="product-item bg-light mb-4">
+       <div class="product-img position-relative overflow-hidden">
+         <img class="img-fluid w-100" src="${object.image}" alt="" />
+         <div class="product-action">
+           <a
+             class="btn btn-outline-dark btn-square"
+             href="#"
+             onclick="${addToCart()}"
+             ><i class="fa fa-shopping-cart"></i
+           ></a>
+           <a class="btn btn-outline-dark btn-square" href="#"
+             onclick="${loveCount()}"><i class="far fa-heart"></i
+           ></a>
+           <a class="btn btn-outline-dark btn-square" href="#"
+             ><i class="fa fa-sync-alt"></i
+           ></a>
+           <a class="btn btn-outline-dark btn-square" href="#"
+             ><i class="fa fa-search"></i
+           ></a>
+         </div>
+       </div>
+       <div class="text-center py-4">
+         <a class="h6 text-decoration-none text-truncate" href=""
+           >${object.name}</a
+         >
+         <div
+           class="d-flex align-items-center justify-content-center mt-2"
+         >
+           <h5>${productCart.discountedPrice}</h5>
+           <h6 class="text-muted ml-2"><del>${object.price}</del></h6>
+         </div>
+         <div
+           class="d-flex align-items-center justify-content-center mb-1"
+         >
+           ${displayRating(object.rating)}
+           <small>(${object.ratingCount})</small>
+         </div>
+       </div>
+     </div>
+   </div> `
 
-//     <!-- product Cart element -->
-// <!-- <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-//   <div class="product-item bg-light mb-4">
-//     <div class="product-img position-relative overflow-hidden">
-//       <img class="img-fluid w-100" src="img/product-1.jpg" alt="" />
-//       <div class="product-action">
-//         <a
-//           class="btn btn-outline-dark btn-square"
-//           href="#"
-//           onclick="addSingleProductToCart({id:1,name:'product-1',price:123,image:'/img/product-1.jpg'})"
-//           ><i class="fa fa-shopping-cart"></i
-//         ></a>
-//         <a class="btn btn-outline-dark btn-square" href="#"
-//           ><i class="far fa-heart"></i
-//         ></a>
-//         <a class="btn btn-outline-dark btn-square" href="#"
-//           ><i class="fa fa-sync-alt"></i
-//         ></a>
-//         <a class="btn btn-outline-dark btn-square" href="#"
-//           ><i class="fa fa-search"></i
-//         ></a>
-//       </div>
-//     </div>
-//     <div class="text-center py-4">
-//       <a class="h6 text-decoration-none text-truncate" href=""
-//         >Product Name Goes Here</a
-//       >
-//       <div
-//         class="d-flex align-items-center justify-content-center mt-2"
-//       >
-//         <h5>$123.00</h5>
-//         <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-//       </div>
-//       <div
-//         class="d-flex align-items-center justify-content-center mb-1"
-//       >
-//         <small class="fa fa-star text-primary mr-1"></small>
-//         <small class="fa fa-star text-primary mr-1"></small>
-//         <small class="fa fa-star text-primary mr-1"></small>
-//         <small class="fa fa-star text-primary mr-1"></small>
-//         <small class="fa fa-star text-primary mr-1"></small>
-//         <small>(99)</small>
-//       </div>
-//     </div>
-//   </div>
-// </div> -->
+    }
 
+
+    displayRating(rating){
+        let ratingCount=parseInt(rating);
+        let displayStars = "";
+        if(ratingCount === 0){
+            displayStars =
+            `<small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>
+            <small class="far fa-star text-primary mr-1"></small>`
+        }else{
+            for(let i=0;i<Math.trunc(rating);i++){
+                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
+            }
+            if(rating%1!==0){{
+                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
+            }
+            for(let i=0;i<5-Math.trunc(rating);i++){
+                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
+            }
+        }
+    }
+
+}
 }

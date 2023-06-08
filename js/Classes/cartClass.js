@@ -1,4 +1,4 @@
-export class cart{
+export class Cart{
     #productName;
     #discountedPrice;
     #quantity;
