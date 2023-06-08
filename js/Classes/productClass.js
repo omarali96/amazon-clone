@@ -24,7 +24,9 @@ export class Product{
         this.#isRecent = object.isRecent;
         this.#color = object.color;
         this.#size = object.size;
-        this.#discountedPrice = object.discountedPrice;
+        //
+       // this.#discountedPrice = object.discountedPrice;
+       this.#discountedPrice = this.#price - (this.#discount * this.#price);
     }
 
     get name(){
@@ -122,22 +124,22 @@ export class Product{
         this.#discountedPrice = this.price - (this.discount * this.price);
     }
 
-    displayProductCart(object,index){
+    displayProductCart(index){
        
      //  <!-- product Cart element -->
      return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
      <div class="product-item bg-light mb-4">
        <div class="product-img position-relative overflow-hidden">
-         <img class="img-fluid w-100" src="${object.image}" alt="" />
+         <img class="img-fluid w-100" src="${this.#image}" alt="" />
          <div class="product-action">
            <a
              class="btn btn-outline-dark btn-square"
              href="#"
-             onclick="${object.addToCart()}"
+             onclick="${this.addToCart()}"
              ><i class="fa fa-shopping-cart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
-             onclick="${object.loveCount()}"><i class="far fa-heart"></i
+             onclick="${this.loveCount()}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
              ><i class="fa fa-sync-alt"></i
@@ -149,19 +151,19 @@ export class Product{
        </div>
        <div class="text-center py-4">
          <a class="h6 text-decoration-none text-truncate" href=""
-           >${object.name}</a
+           >${this.#name}</a
          >
          <div
            class="d-flex align-items-center justify-content-center mt-2"
          >
-           <h5>${object.discountedPrice}</h5>
-           <h6 class="text-muted ml-2"><del>${object.price}</del></h6>
+           <h5>${this.#discountedPrice}</h5>
+           <h6 class="text-muted ml-2"><del>${this.#price}</del></h6>
          </div>
          <div
            class="d-flex align-items-center justify-content-center mb-1"
          >
-           ${displayRating(object.rating)}
-           <small>(${object.ratingCount})</small>
+           ${displayRating(this.#rating)}
+           <small>(${this.#ratingCount})</small>
          </div>
        </div>
      </div>
@@ -171,41 +173,42 @@ export class Product{
 
 
     displayRating(rating){
-        let ratingCount=parseFloat(rating);
-        let displayStars = "";
-        if(ratingCount === 0){
-            displayStars =
-            `<small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>`
-        }else{
-            for(let i=0;i<Math.trunc(ratingCount);i++){
-                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
-            }
-            if(ratingCount%1!==0){{
-                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
-            }
-            for(let i=0;i<5-Math.trunc(ratingCount);i++){
-                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
-            }
-        }
-    }
+    //     let ratingCount=parseFloat(rating);
+    //     let displayStars = "";
+    //     if(ratingCount === 0){
+    //         displayStars =
+    //         `<small class="far fa-star text-primary mr-1"></small>
+    //         <small class="far fa-star text-primary mr-1"></small>
+    //         <small class="far fa-star text-primary mr-1"></small>
+    //         <small class="far fa-star text-primary mr-1"></small>
+    //         <small class="far fa-star text-primary mr-1"></small>`
+    //     }else{
+    //         for(let i=0;i<Math.trunc(ratingCount);i++){
+    //             displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
+    //         }
+    //         if(ratingCount%1!==0){{
+    //             displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
+    //         }
+    //         for(let i=0;i<5-Math.trunc(ratingCount);i++){
+    //             displayStars += `<small class="far fa-star text-primary mr-1"></small>`
+    //         }
+    //     }
+    // }
+    return true;
 
 }
     loveCount(index){
-        let loveCount =parseInt(localStorage.loveCount);
-        loveCount++;
-        localStorage.loveCount = JSON.stringify(loveCount);
-        let loveBtn = document.getElementById(`love-btn${index}`);
-        loveBtn.disabled = true;
+        // let loveCount =parseInt(localStorage.loveCount);
+        // loveCount++;
+        // localStorage.loveCount = JSON.stringify(loveCount);
+        // let loveBtn = document.getElementById(`love-btn${index}`);
+        // loveBtn.disabled = true;
 
-        loveBtn.addEventListener("click",()=>{
-            loveBtn.disabled = false;
-            loveCount--;
-            localStorage.loveCount = JSON.stringify(loveCount);
-        })
+        // loveBtn.addEventListener("click",()=>{
+        //     loveBtn.disabled = false;
+        //     loveCount--;
+        //     localStorage.loveCount = JSON.stringify(loveCount);
+        // })
     }
 
 
