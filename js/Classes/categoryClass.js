@@ -52,7 +52,7 @@ export class Category{
     return resultArr.length < 4 ? resultArr.slice(0) : resultArr.slice(0, 4);
   }
  
-  static fourSortedCat = this.getFourSortedCat(); 
+  
  
   displayCategoryElements() {
     const categoriesSection = document.getElementById("categories-section");

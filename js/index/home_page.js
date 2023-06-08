@@ -35,3 +35,8 @@ const APIs = {
     localStorage.setItem('recentProducts', JSON.stringify(recProducts.data.slice(0,8)));
     console.log(recProducts.data.slice(0,8));
 })(); // Get json data (recent products) from APIs
+
+(function(){
+    localStorage.setItem ('loveCount', 0);
+})();
+

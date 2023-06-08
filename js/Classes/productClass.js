@@ -128,7 +128,7 @@ export class Product{
      return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
      <div class="product-item bg-light mb-4">
        <div class="product-img position-relative overflow-hidden">
-         <img class="img-fluid w-100" src="${object.image}" alt="" />
+         <img class="img-fluid w-100" src="${this.image}" alt="" />
          <div class="product-action">
            <a
              class="btn btn-outline-dark btn-square"
@@ -136,7 +136,7 @@ export class Product{
              onclick="${addToCart()}"
              ><i class="fa fa-shopping-cart"></i
            ></a>
-           <a class="btn btn-outline-dark btn-square" href="#"
+           <a class="btn btn-outline-dark btn-square" href="" id="love-btn"
              onclick="${loveCount()}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
@@ -149,19 +149,19 @@ export class Product{
        </div>
        <div class="text-center py-4">
          <a class="h6 text-decoration-none text-truncate" href=""
-           >${object.name}</a
+           >${this.name}</a
          >
          <div
            class="d-flex align-items-center justify-content-center mt-2"
          >
            <h5>${productCart.discountedPrice}</h5>
-           <h6 class="text-muted ml-2"><del>${object.price}</del></h6>
+           <h6 class="text-muted ml-2"><del>${this.price}</del></h6>
          </div>
          <div
            class="d-flex align-items-center justify-content-center mb-1"
          >
-           ${displayRating(object.rating)}
-           <small>(${object.ratingCount})</small>
+           ${displayRating(this.rating)}
+           <small>(${this.ratingCount})</small>
          </div>
        </div>
      </div>
@@ -171,7 +171,7 @@ export class Product{
 
 
     displayRating(rating){
-        let ratingCount=parseInt(rating);
+        let ratingCount=parseFloat(rating);
         let displayStars = "";
         if(ratingCount === 0){
             displayStars =
@@ -181,17 +181,35 @@ export class Product{
             <small class="far fa-star text-primary mr-1"></small>
             <small class="far fa-star text-primary mr-1"></small>`
         }else{
-            for(let i=0;i<Math.trunc(rating);i++){
+            for(let i=0;i<Math.trunc(ratingCount);i++){
                 displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
             }
-            if(rating%1!==0){{
+            if(ratingCount%1!==0){{
                 displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
             }
-            for(let i=0;i<5-Math.trunc(rating);i++){
+            for(let i=0;i<5-Math.trunc(ratingCount);i++){
                 displayStars += `<small class="far fa-star text-primary mr-1"></small>`
             }
         }
     }
 
 }
+    loveCount(){
+        let loveCount =parseInt(localStorage.loveCount);
+        loveCount++;
+        localStorage.loveCount = loveCount;
+        let loveBtn = document.getElementById("love-btn");
+        loveBtn.disabled = true;
+        loveBtn.addEventListener("click",()=>{
+            loveBtn.disabled = false;
+            loveCount--;
+            localStorage.loveCount = loveCount;
+        })
+    }
+
+
+    addToCart(){
+        
+    }
+
 }
