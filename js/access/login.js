@@ -1,31 +1,52 @@
-const user = document.querySelector("#user");
-const pass = document.querySelector("#pas");
+import { fetchAPI } from "../utils/fetch_api.js";
+import vid from "../helper/validation.js";
+
+// get input elements
+const email = document.querySelector("#Email");
+const passWord = document.querySelector("#passWord");
 const submit = document.querySelector("#sign-in");
-const getUser = localStorage.getItem("userName");
-const getPass = localStorage.getItem("passWord");
+
+// get Error elements
+const emailError = document.querySelector("#emailError");
+const passError = document.querySelector("#passError");
 
 //Switch to Home Page
 submit.addEventListener('click', login);
 
-//login to website
-function login(e) {
+//login to websitea
+async function login(e) {
     e.preventDefault();
-    if (user.value === "" || pass.value === "") {
-        alert("Please fill data!");
+    let flag = false;
+    emailError.innerHTML = ""
+    passError.innerHTML = ""
+    if (!vid.validateEmail(email.value)) {
+        emailError.innerHTML = "not valid email";
+        flag = true;
     }
-    else {
-        checkLogin();
+    if (!vid.validatePassword(passWord.value, 6)) {
+        passError.innerHTML = "Password  Must be more than 6 char!!";
+        flag = true;
     }
+    if (flag) return;
+
+    let body = {
+        "email": email.value,
+        "password": passWord.value
+    }
+    let header = {
+        "Content-Type": "application/json"
+    }
+   
+    let result = await fetchAPI("http://localhost:5000/api/users/login", header, body, "POST");
+    // console.log(result);
+    if (result) {
+        // store data
+        localStorage.setItem("token", result.token);
+        // go to home pages
+          window. location. replace("index.html");
+    }else{
+        alert("Invalid login Credentials Please login again")
+    }
+
 }
 
-//Check User has account or not
-function checkLogin() {
-    if (user.value == getUser && pass.value == getPass) {
-
-        setTimeout(() => { window.location = "index.html" }, 1000);
-    }
-    else {
-        alert("Username or Password is wrong!");
-    }
-
-}

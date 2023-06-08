@@ -56,9 +56,7 @@ function register(e) {
         "Content-Type": "application/json"
     }
     let result =  fetchAPI("http://localhost:5000/api/users/register",header,body,"POST");
-    console.log(result);
-   
-
+    console.log(result)
 }
 
 

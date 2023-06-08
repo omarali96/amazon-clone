@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart | Login Page</title>
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/Login.css">
-    <link rel="stylesheet" href="CSS/all.min.css">
-    <link rel="stylesheet" href="CSS/normalize.css">
+    <link rel="stylesheet" href="CSSS/main.css">
+    <link rel="stylesheet" href="CSSS/Login.css">
+    <link rel="stylesheet" href="CSSS/all.min.css">
+    <link rel="stylesheet" href="CSSS/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/2f2dd22c7b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,13 +35,15 @@
     <section class="section-form">
         <h2>Login..</h2>
         <form action="">
-            <input type="text" placeholder="Enter Username.." class="User" id="user">
-            <input type="password" placeholder="Enter Password.." class="Pass" id="pas">
+            <input type="email" placeholder="Enter E-mail.." class="mail" id="Email">
+            <p id="emailError"></p>
+            <input type="password" placeholder="Enter Password.." class="Pass" id="passWord">
+            <p id="passError"></p>
             <input type="submit" value="Sign in" class="Sin" id="sign-in">
         </form>
     </section>
 
-    <script src="JS/login.js"></script>
+    <script src="js/access/login.js" type="module"></script>
 </body>
 
 </html>
