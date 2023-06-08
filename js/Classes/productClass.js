@@ -122,7 +122,7 @@ export class Product{
         this.#discountedPrice = this.price - (this.discount * this.price);
     }
 
-    displayProductCart(object){
+    displayProductCart(object,index){
         const productCart = new Product(object);
      //  <!-- product Cart element -->
      return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -136,7 +136,7 @@ export class Product{
              onclick="${addToCart()}"
              ><i class="fa fa-shopping-cart"></i
            ></a>
-           <a class="btn btn-outline-dark btn-square" href="" id="love-btn"
+           <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
              onclick="${loveCount()}"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
@@ -194,11 +194,11 @@ export class Product{
     }
 
 }
-    loveCount(){
+    loveCount(index){
         let loveCount =parseInt(localStorage.loveCount);
         loveCount++;
         localStorage.loveCount = JSON.stringify(loveCount);
-        let loveBtn = document.getElementById("love-btn");
+        let loveBtn = document.getElementById(`love-btn${index}`);
         loveBtn.disabled = true;
 
         loveBtn.addEventListener("click",()=>{
