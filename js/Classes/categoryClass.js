@@ -80,7 +80,6 @@ export class Category {
     if (!Array.isArray(this.#categories) || this.#categories.length === 0) {
       throw new Error("Categories is empty/not array");
     }
-    console.log(this.#categories);
     const dropDownDiv = document.createElement("div");
     const navBarElement = document.getElementById("navbar-vertical");
     dropDownDiv.classList.add("navbar-nav");

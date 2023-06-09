@@ -1,4 +1,5 @@
 export class Product{
+    #id;
     #name;
     #image;
     #price;
@@ -13,6 +14,7 @@ export class Product{
     #size;
 
     constructor(object){
+        this.#id = object._id;
         this.#name = object.name;
         this.#image = object.image;
         this.#price = object.price;
@@ -124,19 +126,13 @@ export class Product{
         this.#discountedPrice = this.price - (this.discount * this.price);
     }
 
-    loveCount(){
-        let loveCount =parseInt(localStorage.loveCount);
-        loveCount++;
-        localStorage.loveCount = JSON.stringify(loveCount);
-        // let loveBtn = document.getElementById(`love-btn${index}`);
-        // loveBtn.setAtribute("","disabled");
-
-        // loveBtn.addEventListener("click",()=>{
-        //     loveBtn.disabled = false;
-        //     loveCount--;
-        //     localStorage.loveCount = JSON.stringify(loveCount);
-        // })
+    set id(id){
+        this.#id = id;
     }
+    get id(){
+        return this.#id = id;
+    }
+
 
 
     displayRating(){
@@ -165,7 +161,7 @@ export class Product{
 
 }
 
-    displayProductCart(index){
+    displayProductCart(index, productType){
        
      //  <!-- product Cart element -->
      return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -175,12 +171,13 @@ export class Product{
          <div class="product-action">
            <a
              class="btn btn-outline-dark btn-square"
-             href="#"
-             onclick="${this.addToCart()}"
+             id="cart-btn${index}${productType}"
+             href=""
+             onclick="event.preventDefault()"
              ><i class="fa fa-shopping-cart"></i
            ></a>
-           <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}"
-             onclick="${this.loveCount()}"><i class="far fa-heart"></i
+           <a class="btn btn-outline-dark btn-square" href="" id="love-btn${index}${productType}"
+             onclick="event.preventDefault()"><i class="far fa-heart"></i
            ></a>
            <a class="btn btn-outline-dark btn-square" href="#"
              ><i class="fa fa-sync-alt"></i
@@ -211,13 +208,33 @@ export class Product{
    </div> `
 
     }
-   
-
+    loveCountHandler(){
+        let loveCount =parseInt(localStorage.loveCount);
+        // console.log(loveCount);
+        loveCount++;
+        localStorage.loveCount = JSON.stringify(loveCount);
+        // let loveBtn = document.getElementById(`love-btn${index}`);
+        // loveBtn.setAtribute("","disabled");
+      
+        // loveBtn.addEventListener("click",()=>{
+        //     loveBtn.disabled = false;
+        //     loveCount--;
+        //     localStorage.loveCount = JSON.stringify(loveCount);
+        // })
+      }
+    addToCartHandler(){
+        let addToCart =parseInt(localStorage.addToCart);
+        // let addToCartArray = JSON.parse(localStorage.addToCartArray);
+        // addToCartArray.push(this);
+        addToCart++;
+        localStorage.addToCart = JSON.stringify(addToCart);
+        // localStorage.addToCartArray = JSON.stringify(addToCartArray);
+      } 
    
     
 
-    addToCart(){
+    // addToCart(){
         
-    }
+    // }
 
 }
