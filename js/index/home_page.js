@@ -19,9 +19,9 @@ import { Product } from "../Classes/productClass.js";
 })();
 
 const APIs = {
-  categories: "http://localhost:5500/api/categories/",
-  featProducts: "http://localhost:5500/api/products/getFeatured",
-  recProducts: "http://localhost:5500/api/products/getRecent",
+  categories: "http://localhost:5000/api/categories/",
+  featProducts: "http://localhost:5000/api/products/getFeatured",
+  recProducts: "http://localhost:5000/api/products/getRecent",
 }; // APIs
 
 
@@ -52,7 +52,9 @@ const display = (products, parentID,productType) =>{
     const loveBtn = document.getElementById(`love-btn${i}${productType}`);
     const addToCartBtn = document.getElementById(`cart-btn${i}${productType}`);
     loveBtn.addEventListener(`click`, productsArr[i].loveCountHandler);
-    addToCartBtn.addEventListener('click', productsArr[i].addToCartHandler);
+    addToCartBtn.addEventListener('click', ()=>{
+      productsArr[i].addToCartHandler();
+    });
   }
 
 }

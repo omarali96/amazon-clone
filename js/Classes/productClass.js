@@ -130,7 +130,7 @@ export class Product{
         this.#id = id;
     }
     get id(){
-        return this.#id = id;
+        return this.#id;
     }
 
 
@@ -222,13 +222,10 @@ export class Product{
         //     localStorage.loveCount = JSON.stringify(loveCount);
         // })
       }
-    addToCartHandler(){
-        let addToCart =parseInt(localStorage.addToCart);
-        // let addToCartArray = JSON.parse(localStorage.addToCartArray);
-        // addToCartArray.push(this);
-        addToCart++;
-        localStorage.addToCart = JSON.stringify(addToCart);
-        // localStorage.addToCartArray = JSON.stringify(addToCartArray);
+      addToCartHandler(){
+        let addToCartArray = JSON.parse(localStorage.addToCartArray);
+        addToCartArray.push(this.#id);
+        localStorage.addToCartArray = JSON.stringify(addToCartArray);
       } 
    
     
