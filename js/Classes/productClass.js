@@ -197,8 +197,8 @@ export class Product{
          <div
            class="d-flex align-items-center justify-content-center mt-2"
          >
-           <h5>${this.#discountedPrice}</h5>
-           <h6 class="text-muted ml-2"><del>${this.#price}</del></h6>
+           <h5>$${this.#discountedPrice}</h5>
+           <h6 class="text-muted ml-2"><del>$${this.#price}</del></h6>
          </div>
          <div
            class="d-flex align-items-center justify-content-center mb-1"

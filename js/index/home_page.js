@@ -3,10 +3,20 @@ import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
 import { Product } from "../Classes/productClass.js";
 const APIs = {
-  categories: "http://localhost:5000/api/categories/",
-  featProducts: "http://localhost:5000/api/products/getFeatured",
-  recProducts: "http://localhost:5000/api/products/getRecent",
+  categories: "http://localhost:8000/api/categories/",
+  featProducts: "http://localhost:8000/api/products/getFeatured",
+  recProducts: "http://localhost:8000/api/products/getRecent",
 }; // APIs
+
+const display = (products, parentID) =>{
+  const firstEight = products.data.slice(0, 8);
+  const productsArr = firstEight.map((product) => new Product(product));
+  const parentDiv = document.getElementById(parentID);
+  for(let i=0;i<productsArr.length;i++){
+    const productCard = productsArr[i].displayProductCart(i);
+    parentDiv.innerHTML += productCard; 
+  }
+}
 
 const fetchCategories = function() {
   return new Promise((resolve, reject) => {
@@ -31,6 +41,7 @@ const handleCatData = function(jsonCategories) {
   console.log(sortedCat)
   Category.displayCategoryElements(sortedCat);
 };
+
 fetchCategories()
   .then(handleCatData)
   .catch((err) => {
@@ -39,18 +50,12 @@ fetchCategories()
 
 (async function () {
   const featProducts = await fetchAPI(APIs.featProducts, {}, {}, "GET");
-  localStorage.setItem(
-    "featuredProducts",
-    JSON.stringify(featProducts.data.slice(0, 8))
-  );
+  display(featProducts, "featured-products");
 })(); // Get json data (featured products) from APIs
 
 (async function () {
   const recProducts = await fetchAPI(APIs.recProducts, {}, {}, "GET");
-  localStorage.setItem(
-    "recentProducts",
-    JSON.stringify(recProducts.data.slice(0, 8))
-  );
+  display(recProducts, "recent-products")
 })(); // Get json data (recent products) from APIs
 
 (function(){
