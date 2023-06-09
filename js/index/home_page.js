@@ -3,9 +3,9 @@ import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
 import { Product } from "../Classes/productClass.js";
 const APIs = {
-  categories: "http://localhost:5000/api/categories/",
-  featProducts: "http://localhost:5000/api/products/getFeatured",
-  recProducts: "http://localhost:5000/api/products/getRecent",
+  categories: "http://localhost:5500/api/categories/",
+  featProducts: "http://localhost:5500/api/products/getFeatured",
+  recProducts: "http://localhost:5500/api/products/getRecent",
 }; // APIs
 
 
@@ -69,9 +69,18 @@ fetchCategories()
 })(); // Get json data (recent products) from APIs
 
 (function(){
-   localStorage.setItem('loveCount',JSON.stringify(0));
-   localStorage.setItem('addToCart',JSON.stringify(0));
-   localStorage.setItem('addToCartArray', JSON.stringify([]));
+  if (!localStorage.hasOwnProperty("loveCount")) {
+    localStorage.setItem("loveCount", JSON.stringify(0));
+  } 
+  
+
+  if (!localStorage.hasOwnProperty("addToCart")) {
+    localStorage.setItem("addToCart", JSON.stringify(0));
+  } 
+
+  if (!localStorage.hasOwnProperty("addToCart")) {
+    localStorage.setItem("addToCartArray", JSON.stringify([]));
+  } 
 })();
 
 
