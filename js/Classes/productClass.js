@@ -208,30 +208,33 @@ export class Product{
    </div> `
 
     }
+    cartCounter () {
+        let addedToCart = JSON.parse(localStorage.getItem("addToCartArray"));
+        let displayCartCounter = document.getElementById("cart-counter");
+        displayCartCounter.innerText = addedToCart.length;
+      }
+      
+       loveCounter () {
+        let loveCount = JSON.parse(localStorage.getItem("loveCount"));
+        let displayLoveCounter = document.getElementById("love-counter");
+        displayLoveCounter.innerText = loveCount;
+      }
+      
     loveCountHandler(){
         let loveCount =parseInt(localStorage.loveCount);
-        // console.log(loveCount);
+       
         loveCount++;
         localStorage.loveCount = JSON.stringify(loveCount);
-        // let loveBtn = document.getElementById(`love-btn${index}`);
-        // loveBtn.setAtribute("","disabled");
-      
-        // loveBtn.addEventListener("click",()=>{
-        //     loveBtn.disabled = false;
-        //     loveCount--;
-        //     localStorage.loveCount = JSON.stringify(loveCount);
-        // })
+        loveCounter ();
+       
       }
       addToCartHandler(){
         let addToCartArray = JSON.parse(localStorage.addToCartArray);
         addToCartArray.push(this.#id);
         localStorage.addToCartArray = JSON.stringify(addToCartArray);
+
+        cartCounter ();
       } 
    
-    
-
-    // addToCart(){
-        
-    // }
 
 }
