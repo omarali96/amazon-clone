@@ -2,6 +2,22 @@
 import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
 import { Product } from "../Classes/productClass.js";
+
+(function(){
+  if (!localStorage.hasOwnProperty("loveCount")) {
+    localStorage.setItem("loveCount", JSON.stringify(0));
+  } 
+  
+
+  // if (!localStorage.hasOwnProperty("addToCart")) {
+  //   localStorage.setItem("addToCart", JSON.stringify(0));
+  // } 
+
+  if (!localStorage.hasOwnProperty("addToCartArray")) {
+    localStorage.setItem("addToCartArray", JSON.stringify([]));
+  } 
+})();
+
 const APIs = {
   categories: "http://localhost:5500/api/categories/",
   featProducts: "http://localhost:5500/api/products/getFeatured",
@@ -68,19 +84,5 @@ fetchCategories()
   display(recProducts, "recent-products", 'recent');
 })(); // Get json data (recent products) from APIs
 
-(function(){
-  if (!localStorage.hasOwnProperty("loveCount")) {
-    localStorage.setItem("loveCount", JSON.stringify(0));
-  } 
-  
-
-  if (!localStorage.hasOwnProperty("addToCart")) {
-    localStorage.setItem("addToCart", JSON.stringify(0));
-  } 
-
-  if (!localStorage.hasOwnProperty("addToCart")) {
-    localStorage.setItem("addToCartArray", JSON.stringify([]));
-  } 
-})();
 
 
