@@ -51,7 +51,7 @@ const display = (products, parentID,productType) =>{
   for(let i=0;i<8;i++){
     const loveBtn = document.getElementById(`love-btn${i}${productType}`);
     const addToCartBtn = document.getElementById(`cart-btn${i}${productType}`);
-    loveBtn.addEventListener(`click`, productsArr[i].loveCountHandler);
+    loveBtn.addEventListener(`click`, ()=>{productsArr[i].loveCountHandler();});
     addToCartBtn.addEventListener('click', ()=>{
       productsArr[i].addToCartHandler();
     });
