@@ -18,7 +18,7 @@ for (const product of featProducts.data) {
 let htmlProductContainer = document.getElementById("productContainer");
 
 for (const key in producterContainer) {
-  htmlProductContainer.innerHTML += producterContainer[key].displayProductCart(key);
+  htmlProductContainer.innerHTML += producterContainer[key].displayProductCart(key,'All');
 }
 // filter fun 
 let filterPrice = function (element, prices) {
@@ -72,7 +72,7 @@ let renderProductWithFilter = function () {
   });
   htmlProductContainer.innerHTML = "";
   for (const key in filteredProduct) {
-    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key);
+    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key,'All');
   }
 }
 // filter action on element 
@@ -98,7 +98,7 @@ document.getElementById("sortPrice").addEventListener('click', function (e) {
   filteredProduct.sort((a, b) => a.price > b.price ? 1 : b.price > a.price ? -1 : 0);
   htmlProductContainer.innerHTML = "";
   for (const key in filteredProduct) {
-    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key);
+    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key,'All');
   }
 
 });
@@ -111,7 +111,7 @@ document.getElementById("sortPopularity").addEventListener('click', function (e)
   filteredProduct.sort((a, b) => a.ratingCount < b.ratingCount ? 1 : b.ratingCount < a.ratingCount ? -1 : 0);
   htmlProductContainer.innerHTML = "";
   for (const key in filteredProduct) {
-    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key);
+    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key,'All');
   }
 
 });
@@ -123,9 +123,10 @@ document.getElementById("sortRating").addEventListener('click', function (e) {
   filteredProduct.sort((a, b) => a.rating < b.rating ? 1 : b.rating < a.rating ? -1 : 0);
   htmlProductContainer.innerHTML = "";
   for (const key in filteredProduct) {
-    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key);
+    htmlProductContainer.innerHTML += filteredProduct[key].displayProductCart(key,'All');
   }
 
 });
 
 // pagination and showing menu 
+console.log(producterContainer);
