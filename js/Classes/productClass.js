@@ -1,170 +1,165 @@
-export class Product{
-    #id;
-    #name;
-    #image;
-    #price;
-    #categoryId;
-    #discount;
-    #discountedPrice;
-    #rating;
-    #ratingCount;
-    #isFeatured;
-    #isRecent;
-    #color;
-    #size;
+export class Product {
+  #id;
+  #name;
+  #image;
+  #price;
+  #categoryId;
+  #discount;
+  #discountedPrice;
+  #rating;
+  #ratingCount;
+  #isFeatured;
+  #isRecent;
+  #color;
+  #size;
 
-    constructor(object){
-        this.#id = object._id;
-        this.#name = object.name;
-        this.#image = object.image;
-        this.#price = object.price;
-        this.#categoryId = object.category_id;
-        this.#discount = object.discount;
-        this.#rating = object.rating;
-        this.#ratingCount = object.rating_count;
-        this.#isFeatured = object.is_featured;
-        this.#isRecent = object.is_recent;
-        this.#color = object.color;
-        this.#size = object.size;
-        //
-       // this.#discountedPrice = object.discountedPrice;
-       this.#discountedPrice = this.#price - (this.#discount * this.#price);
-    }
+  constructor(object) {
+    this.#id = object._id;
+    this.#name = object.name;
+    this.#image = object.image;
+    this.#price = object.price;
+    this.#categoryId = object.category_id;
+    this.#discount = object.discount;
+    this.#rating = object.rating;
+    this.#ratingCount = object.rating_count;
+    this.#isFeatured = object.is_featured;
+    this.#isRecent = object.is_recent;
+    this.#color = object.color;
+    this.#size = object.size;
+    //
+    // this.#discountedPrice = object.discountedPrice;
+    this.#discountedPrice = this.#price - this.#discount * this.#price;
+  }
 
-    get name(){
-        return this.#name;
-    }
-    set name(name){
-        this.#name = name;
-    }
-    get image(){
-        return this.#image;
-    }
+  get name() {
+    return this.#name;
+  }
+  set name(name) {
+    this.#name = name;
+  }
+  get image() {
+    return this.#image;
+  }
 
-    set image(image){
-        this.#image = image;
-    
-    }
+  set image(image) {
+    this.#image = image;
+  }
 
-    get price(){
-        return this.#price;
-    }
+  get price() {
+    return this.#price;
+  }
 
-    set price(price){
-        this.#price = price;
-    }
+  set price(price) {
+    this.#price = price;
+  }
 
-    get categoryId(){
-        return this.#categoryId;
-    }
+  get categoryId() {
+    return this.#categoryId;
+  }
 
-    set categoryId(categoryId){
-        this.#categoryId = categoryId;
-    }
+  set categoryId(categoryId) {
+    this.#categoryId = categoryId;
+  }
 
-    get discount(){
-        return this.#discount;
-    }
+  get discount() {
+    return this.#discount;
+  }
 
-    set discount(discount){
-        this.#discount = discount;
-    }
+  set discount(discount) {
+    this.#discount = discount;
+  }
 
-    get rating(){
-        return this.#rating;
-    }
+  get rating() {
+    return this.#rating;
+  }
 
-    set rating(rating){
-        this.#rating = rating;
-    }
+  set rating(rating) {
+    this.#rating = rating;
+  }
 
-    get ratingCount(){
-        return this.#ratingCount;
-    }
+  get ratingCount() {
+    return this.#ratingCount;
+  }
 
-    set ratingCount(ratingCount){
-        this.#ratingCount = ratingCount;
-    }
+  set ratingCount(ratingCount) {
+    this.#ratingCount = ratingCount;
+  }
 
-    get isFeatured(){
-        return this.#isFeatured;
-    }
+  get isFeatured() {
+    return this.#isFeatured;
+  }
 
-    set isFeatured(isFeatured){
-        this.#isFeatured = isFeatured;
-    }
+  set isFeatured(isFeatured) {
+    this.#isFeatured = isFeatured;
+  }
 
-    get isRecent(){
-        return this.#isRecent;
-    }
+  get isRecent() {
+    return this.#isRecent;
+  }
 
-    set isRecent(isRecent){
-        this.#isRecent = isRecent;
-    }
+  set isRecent(isRecent) {
+    this.#isRecent = isRecent;
+  }
 
-    get color(){
-        return this.#color;
-    }
+  get color() {
+    return this.#color;
+  }
 
-    set color(color){
-        this.#color = color;
-    }
+  set color(color) {
+    this.#color = color;
+  }
 
-    get size(){
-        return this.#size;
-    }
+  get size() {
+    return this.#size;
+  }
 
-    set size(size){
-        this.#size = size;
-    }
+  set size(size) {
+    this.#size = size;
+  }
 
-    get discountedPrice(){
-        return this.#discountedPrice;
-    }
+  get discountedPrice() {
+    return this.#discountedPrice;
+  }
 
-    set discountedPrice(discountedPrice){
-        this.#discountedPrice = this.price - (this.discount * this.price);
-    }
+  set discountedPrice(discountedPrice) {
+    this.#discountedPrice = this.price - this.discount * this.price;
+  }
 
-    set id(id){
-        this.#id = id;
-    }
-    get id(){
-        return this.#id;
-    }
+  set id(id) {
+    this.#id = id;
+  }
+  get id() {
+    return this.#id;
+  }
 
-
-
-    displayRating(){
-        let ratingCount=parseFloat(this.#rating);
-        let displayStars = "";
-        if(ratingCount === 0){
-            displayStars =
-            `<small class="far fa-star text-primary mr-1"></small>
+  displayRating() {
+    let ratingCount = parseFloat(this.#rating);
+    let displayStars = "";
+    if (ratingCount === 0) {
+      displayStars = `<small class="far fa-star text-primary mr-1"></small>
             <small class="far fa-star text-primary mr-1"></small>
             <small class="far fa-star text-primary mr-1"></small>
             <small class="far fa-star text-primary mr-1"></small>
-            <small class="far fa-star text-primary mr-1"></small>`
-        }else{
-            for(let i=0;i<Math.trunc(ratingCount);i++){
-                displayStars += `<small class="fa fa-star text-primary mr-1"></small>`
-            }
-            if(ratingCount%1!==0){{
-                displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`
-            }
-            for(let i=0;i<5-Math.ceil(ratingCount);i++){
-                displayStars += `<small class="far fa-star text-primary mr-1"></small>`
-            }
+            <small class="far fa-star text-primary mr-1"></small>`;
+    } else {
+      for (let i = 0; i < Math.trunc(ratingCount); i++) {
+        displayStars += `<small class="fa fa-star text-primary mr-1"></small>`;
+      }
+      if (ratingCount % 1 !== 0) {
+        {
+          displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`;
         }
+        for (let i = 0; i < 5 - Math.ceil(ratingCount); i++) {
+          displayStars += `<small class="far fa-star text-primary mr-1"></small>`;
+        }
+      }
     }
     return displayStars;
+  }
 
-}
-
-    displayProductCart(index, productType){
-       
-     //  <!-- product Cart element -->
-     return` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+  displayProductCart(index, productType) {
+    //  <!-- product Cart element -->
+    return ` <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
      <div class="product-item bg-light mb-4">
        <div class="product-img position-relative overflow-hidden">
          <img class="img-fluid w-100" src="${this.#image}" alt="" />
@@ -205,36 +200,37 @@ export class Product{
          </div>
        </div>
      </div>
-   </div> `
+   </div> `;
+  }
 
-    }
-    cartCounter () {
-        let addedToCart = JSON.parse(localStorage.getItem("addToCartArray"));
-        let displayCartCounter = document.getElementById("cart-counter");
-        displayCartCounter.innerText = addedToCart.length;
-      }
-      
-       loveCounter () {
-        let loveCount = JSON.parse(localStorage.getItem("loveCount"));
-        let displayLoveCounter = document.getElementById("love-counter");
-        displayLoveCounter.innerText = loveCount;
-      }
-      
-    loveCountHandler(){
-        let loveCount =parseInt(localStorage.loveCount);
-       
-        loveCount++;
-        localStorage.loveCount = JSON.stringify(loveCount);
-        loveCounter ();
-       
-      }
-      addToCartHandler(){
-        let addToCartArray = JSON.parse(localStorage.addToCartArray);
-        addToCartArray.push(this.#id);
-        localStorage.addToCartArray = JSON.stringify(addToCartArray);
+  displayCartCounter() {
+    let addedToCart = JSON.parse(localStorage.addToCartArray);
+    let displayCartCount = document.getElementById("cart-counter");
+    displayCartCount.innerText = addedToCart.length;
+    console.log("addedToCart.length", addedToCart.length);
+  }
 
-        cartCounter ();
-      } 
-   
+  displayLoveCounter() {
+    const loveCountParsed = parseInt(localStorage.loveCount);
+    console.log("loveCount", loveCountParsed);
+    const displayLoveCount = document.getElementById("love-counter");
+    console.log("displayLoveCount", displayLoveCount);
+    displayLoveCount.innerText = loveCountParsed;
+  }
 
+  loveCountHandler() {
+    let loveCounter = parseInt(localStorage.loveCount);
+
+    loveCounter++;
+    localStorage.loveCount = JSON.stringify(loveCounter);
+    console.log("loveCounter", loveCounter);
+    this.displayLoveCounter();
+  }
+  addToCartHandler() {
+    let addToCartArray = JSON.parse(localStorage.addToCartArray);
+    addToCartArray.push(this.#id);
+    localStorage.addToCartArray = JSON.stringify(addToCartArray);
+    console.log("addToCartArray", addToCartArray);
+    this.displayCartCounter();
+  }
 }
