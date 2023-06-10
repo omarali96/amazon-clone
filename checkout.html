@@ -167,31 +167,31 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
+                            <input class="form-control" type="text" placeholder="John" id="firstNameInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
+                            <input class="form-control" type="text" placeholder="Doe" id="lastNameInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
+                            <input class="form-control" type="text" placeholder="example@email.com" id="emailInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
+                            <input class="form-control" type="text" placeholder="+123 456 789" id="mobileInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
+                            <input class="form-control" type="text" placeholder="123 Street" id="address1Input">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
+                            <input class="form-control" type="text" placeholder="123 Street" id="address2Input">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Country</label>
-                            <select class="custom-select">
+                            <select class="custom-select" id="countryInput">
                                 <option selected>Egypt</option>
                                 <option>USA</option>
                                 <option>Algeria</option>
@@ -199,15 +199,15 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <input class="form-control" type="text" placeholder="New York" id="cityInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
+                            <input class="form-control" type="text" placeholder="New York" id="stateInput">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
+                            <input class="form-control" type="text" placeholder="123" id="zipcodeInput">
                         </div>
                     </div>
                 </div>
@@ -267,9 +267,9 @@
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                 <div class="bg-light p-30 mb-5">
-                    <div class="border-bottom">
-                        <h6 class="mb-3">Products</h6>
-                        <div class="d-flex justify-content-between">
+                    <div class="border-bottom" id="products-container">
+                        <!-- <h6 class="mb-3">Products</h6> -->
+                        <!-- <div class="d-flex justify-content-between">
                             <p>Product Name 1   x (2)</p>
                             <p>$150</p>
                         </div>
@@ -280,22 +280,22 @@
                         <div class="d-flex justify-content-between">
                             <p>Product Name 3 x (3)</p>
                             <p>$150</p>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <!-- <h6>$150</h6> -->
+                            <h6 id="sub-total"></h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Tax</h6>
-                            <!-- <h6 class="font-weight-medium">$10</h6> -->
+                            <h6 class="font-weight-medium" id="tax"></h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <!-- <h5>$160</h5> -->
+                            <h5 id="total"></h5>
                         </div>
                     </div>
                 </div>
@@ -304,8 +304,8 @@
                     <div class="bg-light p-30">
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
+                                <input type="radio" class="custom-control-input" name="payment" id="paypal" checked>
+                                <label class="custom-control-label" for="paypal" >Paypal</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -320,7 +320,7 @@
                                 <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
                             </div>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <button class="btn btn-block btn-primary font-weight-bold py-3" id="placeOrderBtn">Place Order</button>
                     </div>
                 </div>
             </div>
@@ -413,6 +413,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/checkout/checkout.js" type="module"></script>
 </body>
 
 </html>
