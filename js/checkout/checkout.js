@@ -1,3 +1,4 @@
+import { fetchAPI } from "/js/utils/fetch_api.js";
 const validateInput = (user) => {
   if (typeof user !== "object") throw new Error("Data type is invalid");
   const nameReg = /^[A-Za-z\s]+$/;
@@ -39,24 +40,36 @@ const getUserInput = () => {
     selectedCountry: selectedOption.text,
   };
   if (validateInput(userData)) {
+    if(!localStorage.token) alert('Please loggin first');
+    const res = fetchAPI("http://localhost:8000/api/orders",
+     {'x-access-token': localStorage.getItem('token')}
+     , JSON.parse(localStorage.cart),
+      "POST");
+    if(res.status === 'success'){
+      alert('Order is successfully placed.');
+      window.location.href = 'index.html';
+    }
+    else{
+      alert('Error! Try again.');
+    }
   } else {
     alert("Input is invalid");
   }
 };
 
-const handleTax = (cart, option) => {
+const handleTax = (sum, option) => {
   const Taxes = {
     paypal: 0.1,
     directcheck: 0.15,
-    banktransfer: 0.5,
+    banktransfer: 0.05,
   };
   const subTotalElement = document.getElementById("sub-total");
   const taxElement = document.getElementById("tax");
   const total = document.getElementById("total");
-  const subTotal = cart.getSubTotal();
+  const subTotal = sum;
   let tax;
   switch (option) {
-    case "paypad":
+    case "paypal":
       tax = Taxes.paypal * subTotal;
       break;
     case "directcheck":
@@ -74,31 +87,35 @@ const handleTax = (cart, option) => {
   total.innerHTML = tax + subTotal;
 };
 
-const cart = JSON.parse(localStorage.getItem("cart"));
+const cartlines = JSON.parse(localStorage.getItem('cart'));
+let sum = 0;
+console.log(cartlines);
+console.log(cartlines[0].quantity);
 (function () {
   const productsContainer = document.getElementById("products-container");
   productsContainer.innerHTML = `<h6 class="mb-3">Products</h6>`;
-  for (const cartline of cart.cartLines) {
+  for (const line of cartlines) {
+    sum+=line.productDiscounted * line.quantity;
     const productContainer = `<div class="d-flex justify-content-between">
-        <p>${cartline.product.name}   x (${cartline.quantity})</p>
-        <p>$${cartline.getTotalPrince()}</p>
+        <p>${line.productName}   x (${line.quantity})</p>
+        <p>$${line.productDiscounted * line.quantity}</p>
     </div>`;
     productsContainer.innerHTML += productContainer;
   }
-  handleTax(cart, "paypal");
+  handleTax(sum, "paypal");
 })();
 (function () {
   const paypal = document.getElementById("paypal");
   const directcheck = document.getElementById("directcheck");
   const banktransfer = document.getElementById("banktransfer");
   paypal.addEventListener("change", () => {
-    handleTax(cart, "paypal");
+    handleTax(sum, "paypal");
   });
   directcheck.addEventListener("change", () => {
-    handleTax(cart, "directcheck");
+    handleTax(sum, "directcheck");
   });
   banktransfer.addEventListener("change", () => {
-    handleTax(cart, "banktransfer");
+    handleTax(sum, "banktransfer");
   });
 })();
 (function () {
