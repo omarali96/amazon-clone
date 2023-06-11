@@ -32,8 +32,6 @@ import { Cart } from "../Classes/cartClass.js";
           const tableRow = element.parentNode.parentNode.parentNode.parentNode;
           tableRow.remove();
           cart.deleteCartLine(elementID);
-          const subTotalElement = document.getElementById("sub-total");
-        subTotalElement.innerHTML = "$" + cart.getSubTotal();
         }
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
@@ -52,6 +50,7 @@ import { Cart } from "../Classes/cartClass.js";
       });
     }
   });
+  localStorage.setItem('cart', cart);
 })();
 
 const checkoutBtn = document.getElementById('checkout-button');
