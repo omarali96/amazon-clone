@@ -47,6 +47,7 @@ const getUserInput = () => {
       "POST");
     if(res.status === 'success'){
       alert('Order is successfully placed.');
+      localStorage.clear();
       window.location.href = 'index.html';
     }
     else{
