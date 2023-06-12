@@ -3,9 +3,16 @@ import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
 import { Product } from "../Classes/productClass.js";
 
+// logout function
+ let logout = function (){
+  localStorage.removeItem("token")
+   // go to home pages
+   window. location. replace("index.html");
+}
 
 // check love and cart counter in localStorage 
-(function(){
+
+window.onload = function(){
   if (!localStorage.hasOwnProperty("loveCount")) {
     localStorage.setItem("loveCount", JSON.stringify(0));
   }else{
@@ -16,8 +23,17 @@ import { Product } from "../Classes/productClass.js";
     localStorage.setItem("addToCartArray", JSON.stringify([]));
   }else{
       document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length; 
-  } 
-})();
+  }
+
+  if (!localStorage.hasOwnProperty("token")) {
+    document.getElementById("access").innerHTML = `<a class="dropdown-item" href="login.html">Sign in</a><a class="dropdown-item" href="register.html">Sign up</a>`;
+  }else{
+    document.getElementById("access").innerHTML = `<p class="dropdown-item" id="logout">Logout</p>`;
+    document.getElementById("logout").addEventListener('click',()=>logout())
+  }
+};
+
+
 
 const APIs = {
   categories: "http://localhost:5000/api/categories/",
@@ -88,4 +104,5 @@ fetchCategories()
 })(); // Get json data (recent products) from APIs
 
 
+//  access
 

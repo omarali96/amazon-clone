@@ -1,4 +1,88 @@
 import { fetchAPI } from "/js/utils/fetch_api.js";
+import { Category } from "../Classes/categoryClass.js";
+ // APIs
+
+// logout function
+let logout = function (){
+  localStorage.removeItem("token")
+   // go to home pages
+   window. location. replace("index.html");
+}
+
+// check love and cart counter in localStorage 
+
+window.onload = function(){
+  if (!localStorage.hasOwnProperty("loveCount")) {
+    localStorage.setItem("loveCount", JSON.stringify(0));
+  }else{
+    document.getElementById('love-counter').innerHTML = Number(localStorage.getItem("loveCount"));
+  }
+
+  if (!localStorage.hasOwnProperty("addToCartArray")) {
+    localStorage.setItem("addToCartArray", JSON.stringify([]));
+  }else{
+      document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length; 
+  }
+
+  if (!localStorage.hasOwnProperty("token")) {
+    document.getElementById("access").innerHTML = `<a class="dropdown-item" href="login.html">Sign in</a><a class="dropdown-item" href="register.html">Sign up</a>`;
+  }else{
+    document.getElementById("access").innerHTML = `<p class="dropdown-item" id="logout">Logout</p>`;
+    document.getElementById("logout").addEventListener('click',()=>logout())
+  }
+};
+
+
+
+const handleCatData = function(jsonCategories) {
+  for (let i = 0; i < jsonCategories.data.length; i++) {
+    const category = new Category(
+      jsonCategories.data[i].name,
+      jsonCategories.data[i].image,
+      jsonCategories.data[i].productCount,
+      jsonCategories.data[i]._id
+    );
+    Category.addCategory(category);
+  }
+  Category.displayDropDownMenu();
+};
+
+
+
+const fetchCategories = function() {
+  return new Promise((resolve, reject) => {
+    const jsonCategories = fetchAPI("http://localhost:5000/api/categories/", {}, {}, "GET");
+    resolve(jsonCategories);
+    reject(new Error("Data not found."));
+  });
+} // Get json data (categories) from APIs
+
+
+
+fetchCategories()
+  .then(handleCatData)
+  .catch((err) => {
+    console.error("Error: ", err);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const validateInput = (user) => {
   if (typeof user !== "object") throw new Error("Data type is invalid");

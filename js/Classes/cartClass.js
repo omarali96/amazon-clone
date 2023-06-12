@@ -22,7 +22,7 @@ export class Cart {
 
     for (const entry of this.map) {
       const response = await fetch(
-        `http://localhost:8000/api/products/${entry[0]}`
+        `http://localhost:5000/api/products/${entry[0]}`
       );
       const jsonData = await response.json();
       tempArr.push(jsonData.data);

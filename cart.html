@@ -34,7 +34,7 @@
   <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-      
+    
       <div
         class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex"
       >
@@ -93,7 +93,7 @@
             style="width: calc(100% - 30px); z-index: 999"
           >
             <div class="navbar-nav w-100">
-              <div class="nav-item dropdown dropright">
+              <!-- <div class="nav-item dropdown dropright">
                 <a
                   href="#"
                   class="nav-link dropdown-toggle"
@@ -107,8 +107,8 @@
                   <a href="" class="dropdown-item">Women's Dresses</a>
                   <a href="" class="dropdown-item">Baby's Dresses</a>
                 </div>
-              </div>
-              <a href="" class="nav-item nav-link">Shirts</a>
+              </div> -->
+              <!-- <a href="" class="nav-item nav-link">Shirts</a>
               <a href="" class="nav-item nav-link">Jeans</a>
               <a href="" class="nav-item nav-link">Swimwear</a>
               <a href="" class="nav-item nav-link">Sleepwear</a>
@@ -116,7 +116,7 @@
               <a href="" class="nav-item nav-link">Jumpsuits</a>
               <a href="" class="nav-item nav-link">Blazers</a>
               <a href="" class="nav-item nav-link">Jackets</a>
-              <a href="" class="nav-item nav-link">Shoes</a>
+              <a href="" class="nav-item nav-link">Shoes</a> -->
             </div>
           </nav>
         </div>
@@ -149,24 +149,31 @@
                 <a href="shop.html" class="nav-item nav-link">Shop</a>
                 <a href="checkout.html" class="nav-item nav-link">Checkout</a>
               </div>
-              <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+              <div class="navbar-nav  py-0 d-none d-lg-flex justify-content-between align-items-center">
                 <a href="" class="btn px-0">
                   <i class="fas fa-heart text-primary"></i>
-                  <span
+                  <span id = "love-counter"
                     class="badge text-secondary border border-secondary rounded-circle"
                     style="padding-bottom: 2px"
                     >0</span
                   >
                 </a>
-                <a href="" class="btn px-0 ml-3">
+                <a href="cart.html" class="btn px-0 ml-3">
                   <i class="fas fa-shopping-cart text-primary"></i>
-                  <span
+                  <span id = "cart-counter"
                     class="badge text-secondary border border-secondary rounded-circle"
                     style="padding-bottom: 2px"
                     >0</span
                   >
                 </a>
+                <div class=" navbar-nav ml-auto nav-link">
+                  <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">My Account</button>
+                  <div class="dropdown-menu dropdown-menu-right " id="access" >
+                    
+                  </div>
               </div>
+              </div>
+           
             </div>
           </nav>
         </div>
