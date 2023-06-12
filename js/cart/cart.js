@@ -49,9 +49,13 @@ import { Cart } from "../Classes/cartClass.js";
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
       });
     }
+    localStorage.setItem('cart',JSON.stringify(cart.cartLines));
+    console.log(JSON.parse(localStorage.getItem('cart'))[0].quantity);
   });
-  localStorage.setItem('cart', cart);
 })();
 
 const checkoutBtn = document.getElementById('checkout-button');
-checkoutBtn.addEventListener('click',()=>window.location.href='checkout.html');
+checkoutBtn.addEventListener('click',()=>{
+  if(!localStorage.token) window.location.href = 'login.html';
+  else window.location.href='checkout.html';
+});

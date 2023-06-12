@@ -1,15 +1,19 @@
 export class CartLine{
-    product;
+    productName;
+    productImage;
+    productDiscounted;
     quantity;
     constructor(product, quantity){
-      this.product = product;
+      this.productName = product.name;
+      this.productImage = product.image;
+      this.productDiscounted = product.discountedPrice;
       this.quantity = quantity;
     }
     get quantity(){
         return this.quantity;
     }
     getTotalPrice(){
-      return this.product.discountedPrice * this.quantity;
+      return this.productDiscounted * this.quantity;
     }
     increment(){
       this.quantity++;
@@ -21,10 +25,10 @@ export class CartLine{
       return `
       <tr>
           <td class="align-middle">
-            <img src="../../${this.product.image}" alt="" style="width: 50px" />
-            ${this.product.name}
+            <img src="../../${this.productImage}" alt="" style="width: 50px" />
+            ${this.productName}
           </td>
-          <td class="align-middle">$${this.product.discountedPrice}</td>
+          <td class="align-middle">$${this.productDiscounted}</td>
           <td class="align-middle">
             <div
               class="input-group quantity mx-auto"
