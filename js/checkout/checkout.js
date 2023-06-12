@@ -24,6 +24,12 @@ const validateInput = (user) => {
   return false;
 };
 
+const clearLocalStorage = ()=>{
+  for(let i=0; i<localStorage.length; i++){
+    const key = localStorage.key(i);
+    if(key !== 'token') localStorage.removeItem(key);
+  }
+}
 const getUserInput = () => {
   const countryInput = document.getElementById("countryInput");
   const selectedIndex = countryInput.selectedIndex;
@@ -49,7 +55,7 @@ const getUserInput = () => {
       "POST");
     if(res.status === 'success'){
       alert('Order is successfully placed.');
-      localStorage.clear();
+      clearLocalStorage();
       window.location.href = 'index.html';
     }
     else{
