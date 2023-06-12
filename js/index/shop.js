@@ -91,9 +91,9 @@ for (const product of featProducts.data) {
 filteredProduct = producterContainer.map(e=>e);
 let htmlProductContainer = document.getElementById("productContainer");
 
-for (const key in producterContainer) {
-  htmlProductContainer.innerHTML += producterContainer[key].displayProductCart(key,'All');
-}
+// for (const key in producterContainer) {
+//   htmlProductContainer.innerHTML += producterContainer[key].displayProductCart(key,'All');
+// }
 // filter fun 
 let filterPrice = function (element, prices) {
   if (prices.includes("all")) return true;
@@ -216,6 +216,12 @@ document.getElementById("sortRating").addEventListener('click', function (e) {
     let slicedProduct =  filteredProduct.slice(start,start+length);
     for (const key in slicedProduct) {
       htmlProductContainer.innerHTML += slicedProduct[key].displayProductCart(key,'All');
+    }
+    for (const key in slicedProduct) {
+      const loveBtn = document.getElementById(`love-btn${key}All`);
+      const addToCartBtn = document.getElementById(`cart-btn${key}All`);
+      loveBtn.addEventListener(`click`, () => { slicedProduct[key].loveCountHandler(); });
+      addToCartBtn.addEventListener('click',() => { slicedProduct[key].addToCartHandler(); }); 
     }
   }
 

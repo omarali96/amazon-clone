@@ -210,9 +210,7 @@ export class Product {
   
     displayLoveCounter() {
       const loveCountParsed = parseInt(localStorage.loveCount);
-      console.log("loveCount", loveCountParsed);
       const displayLoveCount = document.getElementById("love-counter");
-      console.log("displayLoveCount", displayLoveCount);
       displayLoveCount.innerText = loveCountParsed;
     }
   
@@ -221,7 +219,6 @@ export class Product {
   
       loveCounter++;
       localStorage.loveCount = JSON.stringify(loveCounter);
-      console.log("loveCounter", loveCounter);
       this.displayLoveCounter();
     }
     addToCartHandler() {
