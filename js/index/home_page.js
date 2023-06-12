@@ -3,18 +3,19 @@ import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
 import { Product } from "../Classes/productClass.js";
 
+
+// check love and cart counter in localStorage 
 (function(){
   if (!localStorage.hasOwnProperty("loveCount")) {
     localStorage.setItem("loveCount", JSON.stringify(0));
-  } 
-  
-
-  // if (!localStorage.hasOwnProperty("addToCart")) {
-  //   localStorage.setItem("addToCart", JSON.stringify(0));
-  // } 
+  }else{
+    document.getElementById('love-counter').innerHTML = Number(localStorage.getItem("loveCount"));
+  }
 
   if (!localStorage.hasOwnProperty("addToCartArray")) {
     localStorage.setItem("addToCartArray", JSON.stringify([]));
+  }else{
+      document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length; 
   } 
 })();
 

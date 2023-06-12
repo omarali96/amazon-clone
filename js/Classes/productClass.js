@@ -121,9 +121,7 @@ export class Product {
       return this.#discountedPrice;
     }
   
-    set discountedPrice(discountedPrice) {
-      this.#discountedPrice = this.price - this.discount * this.price;
-    }
+    
   
     set id(id) {
       this.#id = id;
@@ -147,7 +145,7 @@ export class Product {
         }
         if (ratingCount % 1 !== 0) {
           {
-            displayStars += `<small class="fa fa-star-half text-primary mr-1"></small>`;
+            displayStars += `<small class="fa fa-star-half-alt text-primary mr-1"></small>`;
           }
           for (let i = 0; i < 5 - Math.ceil(ratingCount); i++) {
             displayStars += `<small class="far fa-star text-primary mr-1"></small>`;

@@ -1,4 +1,5 @@
 import { fetchAPI } from "/js/utils/fetch_api.js";
+
 const validateInput = (user) => {
   if (typeof user !== "object") throw new Error("Data type is invalid");
   const nameReg = /^[A-Za-z\s]+$/;
@@ -39,6 +40,7 @@ const getUserInput = () => {
     zipcodeInput: document.getElementById("zipcodeInput"),
     selectedCountry: selectedOption.text,
   };
+  console.log(userData);
   if (validateInput(userData)) {
     if(!localStorage.token) alert('Please loggin first');
     const res = fetchAPI("http://localhost:8000/api/orders",
