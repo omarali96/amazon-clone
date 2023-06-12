@@ -53,7 +53,7 @@ export class Cart {
       if (cartLine !== null) {
         return acc + cartLine.getTotalPrice();
       }
-      return acc;
+      return parseFloat(acc.toFixed(2));
     }, 0);
   }
   displayTable() {

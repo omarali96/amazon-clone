@@ -175,9 +175,9 @@ const handleTax = (sum, option) => {
       tax = Taxes.paypal * subTotal;
       break;
   }
-  subTotalElement.innerHTML = subTotal;
-  taxElement.innerHTML = tax;
-  total.innerHTML = tax + subTotal;
+  subTotalElement.innerHTML = parseFloat(subTotal.toFixed(2)) ;
+  taxElement.innerHTML = parseFloat(tax.toFixed(2));
+  total.innerHTML = parseFloat((tax + subTotal).toFixed(2));
 };
 
 const cartlines = JSON.parse(localStorage.getItem('cart'));
