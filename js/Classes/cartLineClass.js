@@ -20,6 +20,8 @@ export class CartLine{
     }
     decrement(){
       this.quantity = Math.max(this.quantity-1,1);
+     
+
     }
     displayHTML(i){
       return `

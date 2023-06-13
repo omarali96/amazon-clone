@@ -133,7 +133,7 @@ const getUserInput = () => {
   console.log(userData);
   if (validateInput(userData)) {
     if(!localStorage.token) alert('Please loggin first');
-    const res = fetchAPI("http://localhost:8000/api/orders",
+    const res = fetchAPI("http://localhost:5000/api/orders",
      {'x-access-token': localStorage.getItem('token')}
      , JSON.parse(localStorage.cart),
       "POST");

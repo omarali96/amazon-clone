@@ -93,14 +93,17 @@ fetchCategories()
         const elementID = element.id.slice(-1);
         const cartline = cart.cartLines[elementID];
         cartline.decrement();
-        if (cartline.quantity !== 1) {
+        if (cartline.quantity !== 0) {
           const quantityDiv = element.parentNode.parentNode;
           const inputElement = quantityDiv.querySelector("input");
           inputElement.value = cartline.quantity;
+          localStorage.cart=JSON.stringify(cart.cartLines);
+          upadateCounter();
         } else {
           const tableRow = element.parentNode.parentNode.parentNode.parentNode;
           tableRow.remove();
           cart.deleteCartLine(elementID);
+
         }
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
@@ -109,17 +112,20 @@ fetchCategories()
     for (const element of Array.from(incBtns)) {
       element.addEventListener("click", () => {
         const elementID = element.id.slice(-1);
+        console.log("elementID",elementID);
         const cartline = cart.cartLines[elementID];
         cartline.increment();
         const quantityDiv = element.parentNode.parentNode;
         const inputElement = quantityDiv.querySelector("input");
         inputElement.value = cartline.quantity;
+        localStorage.cart=JSON.stringify(cart.cartLines);
+        upadateCounter();
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
       });
     }
     localStorage.setItem('cart',JSON.stringify(cart.cartLines));
-    console.log(JSON.parse(localStorage.getItem('cart'))[0].quantity);
+    
   });
 })();
 
@@ -128,3 +134,17 @@ checkoutBtn.addEventListener('click',()=>{
   if(!localStorage.token) window.location.href = 'login.html';
   else window.location.href='checkout.html';
 });
+
+
+function upadateCounter(){
+  //let cartCounter=document.getElementById('cart-counter').innerHTML;
+ 
+  let cartArr= JSON.parse(localStorage.getItem("cart"));
+  let updatedCounter=0;  
+  for(let i=0;i<cartArr.length;i++){
+    updatedCounter+=cartArr[i].quantity;
+  }
+  console.log(updatedCounter);
+  document.getElementById('cart-counter').innerHTML = updatedCounter;
+
+}
