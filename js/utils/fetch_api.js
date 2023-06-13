@@ -1,4 +1,5 @@
 export async function fetchAPI(url, header = {}, body = {}, method = "GET") {
+
   if (typeof url !== "string" || url.length === 0 || !url.startsWith("http")) {
     throw new Error("Invalid URL");
   }
@@ -7,6 +8,8 @@ export async function fetchAPI(url, header = {}, body = {}, method = "GET") {
   }
   if (method === "POST") {
     body = JSON.stringify(body);
+   
+    
     try {
       const response = await fetch(url, {
         method: method,

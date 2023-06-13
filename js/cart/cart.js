@@ -60,6 +60,10 @@ const fetchCategories = function() {
 
 
 
+/* This code is making a GET request to the API endpoint "http://localhost:5000/api/categories/" to
+fetch data about product categories. Once the data is retrieved, it calls the function
+"handleCatData" to process the data and create Category objects. If there is an error in fetching
+the data, it logs the error to the console. */
 fetchCategories()
   .then(handleCatData)
   .catch((err) => {
@@ -67,6 +71,14 @@ fetchCategories()
   });
 
 
+
+/* This code block is an immediately invoked function expression (IIFE) that is responsible for
+displaying the user's cart on the webpage. It retrieves the cart data from local storage, creates a
+new Cart object, fetches the data for each product in the cart, and then displays the cart table on
+the webpage. It also adds event listeners to the delete, decrement, and increment buttons on each
+cart line, which update the cart data in local storage and the cart table on the webpage. Finally,
+it updates the cart data in local storage with any changes made and updates the cart counter on the
+webpage. */
 
 (function () {
   const productArray = JSON.parse(localStorage.getItem("addToCartArray"));
@@ -86,6 +98,7 @@ fetchCategories()
         cart.deleteCartLine(elementID);
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
+        
       });
     }
     for (const element of Array.from(decBtns)) {
@@ -129,6 +142,11 @@ fetchCategories()
   });
 })();
 
+/* This code is selecting the HTML element with the ID "checkout-button" and adding an event listener
+to it. When the button is clicked, the code checks if there is a "token" key in the localStorage
+object. If there is no "token" key, the user is redirected to the "login.html" page. If there is a
+"token" key, the user is redirected to the "checkout.html" page. This code is essentially handling
+the logic for the checkout button on the webpage. */
 const checkoutBtn = document.getElementById('checkout-button');
 checkoutBtn.addEventListener('click',()=>{
   if(!localStorage.token) window.location.href = 'login.html';
@@ -136,15 +154,17 @@ checkoutBtn.addEventListener('click',()=>{
 });
 
 
+/**
+ * The function updates the cart counter on a webpage based on the quantity of items in the user's cart
+ * stored in local storage.
+ */
 function upadateCounter(){
-  //let cartCounter=document.getElementById('cart-counter').innerHTML;
- 
   let cartArr= JSON.parse(localStorage.getItem("cart"));
   let updatedCounter=0;  
   for(let i=0;i<cartArr.length;i++){
     updatedCounter+=cartArr[i].quantity;
   }
-  console.log(updatedCounter);
+  
   document.getElementById('cart-counter').innerHTML = updatedCounter;
 
 }

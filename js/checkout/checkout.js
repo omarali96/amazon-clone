@@ -1,4 +1,4 @@
-import { fetchAPI } from "/js/utils/fetch_api.js";
+import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
  // APIs
 
@@ -65,42 +65,60 @@ fetchCategories()
     console.error("Error: ", err);
   });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * The function validates user input data based on regular expressions and returns true if all inputs
+ * match the expected format.
+ * @returns a boolean value - `true` if all the input fields match their respective regular
+ * expressions, and `false` otherwise.
+ */
 const validateInput = (user) => {
   if (typeof user !== "object") throw new Error("Data type is invalid");
-  const nameReg = /^[A-Za-z\s]+$/;
-  const addressReg = /^[a-zA-Z0-9\s,'-]+$/;
-  const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const mobileReg = /^\d{10}$/;
-  const cityStateReg = /^[A-Za-z\s]+$/;
-  const zipcodeReg = /^\d{5}$/;
+  const nameReg = /^[a-z ,.'-]+$/i;
+  const addressReg = /^[A-Za-z0-9'\.\-\s\,]+$/;
+  const emailReg = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+  const mobileReg = /^[0-9]{11}$/;
+  const cityReg = /([A-Za-z]+(?: [A-Za-z]+)*),? ([A-Za-z]*)/;
+  const stateReg=/[A-Za-z]*$/
+  const zipcodeReg = /^[0-9]{5}$/;
   if (
+    //     address1Input
+    // :
+    // "17  Ibrahim Saif from Ali Heiba"
+    // address2Input
+    // :
+    // "asd"
+    // cityInput
+    // :
+    // "Victoria, Alexandria"
+    // emailInput
+    // :
+    // "oamr@gmail.com"
+    // firstNameInput
+    // :
+    // "omar"
+    // lastNameInput
+    // :
+    // "ali"
+    // mobileInput
+    // :
+    // "01012107754"
+    // selectedCountry
+    // :
+    // "Egypt"
+    // stateInput
+    // :
+    // "alex"
+    // zipcodeInput
+    // :
+    // "21628
     nameReg.test(user.firstNameInput) &&
     nameReg.test(user.lastNameInput) &&
     addressReg.test(user.address1Input) &&
     addressReg.test(user.address2Input) &&
     emailReg.test(user.emailInput) &&
     mobileReg.test(user.mobileInput) &&
-    cityStateReg.test(user.stateInput) &&
-    cityStateReg.test(user.cityInput) &&
+    stateReg.test(user.stateInput) &&
+    cityReg.test(user.cityInput) &&
     zipcodeReg.test(user.zipcodeInput)
   ) {
     return true;
@@ -113,41 +131,47 @@ const clearLocalStorage = ()=>{
     const key = localStorage.key(i);
     if(key !== 'token') localStorage.removeItem(key);
   }
-}
+}/**
+ * The function gets user input, validates it, and sends a POST request to a server to place an order
+ */
+
 const getUserInput = () => {
   const countryInput = document.getElementById("countryInput");
   const selectedIndex = countryInput.selectedIndex;
   const selectedOption = countryInput.options[selectedIndex];
   const userData = {
-    firstNameInput: document.getElementById("firstNameInput"),
-    lastNameInput: document.getElementById("lastNameInput"),
-    emailInput: document.getElementById("emailInput"),
-    address1Input: document.getElementById("address1Input"),
-    address2Input: document.getElementById("address2Input"),
-    mobileInput: document.getElementById("mobileInput"),
-    cityInput: document.getElementById("cityInput"),
-    stateInput: document.getElementById("stateInput"),
-    zipcodeInput: document.getElementById("zipcodeInput"),
-    selectedCountry: selectedOption.text,
-  };
+    firstNameInput: document.getElementById("firstNameInput").value,
+    lastNameInput: document.getElementById("lastNameInput").value,
+    emailInput: document.getElementById("emailInput").value,
+    address1Input: document.getElementById("address1Input").value,
+    address2Input: document.getElementById("address2Input").value,
+    mobileInput: document.getElementById("mobileInput").value,
+    cityInput: document.getElementById("cityInput").value,
+    stateInput: document.getElementById("stateInput").value,
+    zipcodeInput: document.getElementById("zipcodeInput").value,
+    selectedCountry: selectedOption.text
+};
   console.log(userData);
   if (validateInput(userData)) {
-    if(!localStorage.token) alert('Please loggin first');
+    if(!localStorage.token) {
+      alert("Please loggin first");
+    }
     const res = fetchAPI("http://localhost:5000/api/orders",
-     {'x-access-token': localStorage.getItem('token')}
+     { "Content-Type": "application/json",'x-access-token': localStorage.getItem('token')}
      , JSON.parse(localStorage.cart),
       "POST");
+      console.log(res.status);
     if(res.status === 'success'){
       alert('Order is successfully placed.');
       clearLocalStorage();
       window.location.href = 'index.html';
-    }
-    else{
+    }else{
       alert('Error! Try again.');
     }
   } else {
     alert("Input is invalid");
   }
+
 };
 
 const handleTax = (sum, option) => {
