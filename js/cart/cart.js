@@ -71,100 +71,99 @@ fetchCategories()
   });
 
 
-
-/* This code block is an immediately invoked function expression (IIFE) that is responsible for
-displaying the user's cart on the webpage. It retrieves the cart data from local storage, creates a
-new Cart object, fetches the data for each product in the cart, and then displays the cart table on
-the webpage. It also adds event listeners to the delete, decrement, and increment buttons on each
-cart line, which update the cart data in local storage and the cart table on the webpage. Finally,
-it updates the cart data in local storage with any changes made and updates the cart counter on the
-webpage. */
-
-(function () {
-  const productArray = JSON.parse(localStorage.getItem("addToCartArray"));
-  const cart = new Cart(productArray);
-  cart.fetchData().then(() => {
-    cart.displayTable();
-    const subTotalElement = document.getElementById("sub-total");
-    subTotalElement.innerHTML = "$" + cart.getSubTotal();
-    const deleteBtns = document.querySelectorAll('[id^="remove"]');
-    const decBtns = document.querySelectorAll('[id^="decrement"]');
-    const incBtns = document.querySelectorAll('[id^="increment"]');
-    for (const element of Array.from(deleteBtns)) {
-      element.addEventListener("click", () => {
-        const elementID = element.id.slice(-1);
-        const tableRow = element.parentNode.parentNode;
-        tableRow.remove();
-        cart.deleteCartLine(elementID);
-        const subTotalElement = document.getElementById("sub-total");
-        subTotalElement.innerHTML = "$" + cart.getSubTotal();
-        
-      });
+  function updateArrayOnIncrease(ID){
+    let addToCartArray = JSON.parse(localStorage.addToCartArray);
+    addToCartArray.push(ID);
+    localStorage.addToCartArray = JSON.stringify(addToCartArray);
+    document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length;
+  }
+  function updateArrayOnDelete(ID){
+    let addToCartArray = JSON.parse(localStorage.addToCartArray);
+    for(const id of addToCartArray){
+      if(id===ID){
+        addToCartArray = addToCartArray.filter((product)=> product !== ID);
+        break;
+      }
+      document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length;
     }
-    for (const element of Array.from(decBtns)) {
-      element.addEventListener("click", () => {
-        const elementID = element.id.slice(-1);
-        const cartline = cart.cartLines[elementID];
-        cartline.decrement();
-        if (cartline.quantity !== 0) {
+    localStorage.addToCartArray = JSON.stringify(addToCartArray);
+  }
+  
+  function updateArrayOnDecrease(ID){
+    let addToCartArray = JSON.parse(localStorage.addToCartArray);
+    for(let i=0;i<addToCartArray.length; i++){
+      if(addToCartArray[i] === ID){
+        addToCartArray.splice(i,1);
+        break;
+      }
+      document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length;
+    }
+    localStorage.addToCartArray = JSON.stringify(addToCartArray);
+  }
+  
+  (function () {
+    const productArray = JSON.parse(localStorage.getItem("addToCartArray"));
+    const cart = new Cart(productArray);
+    cart.fetchData().then(() => {
+      cart.displayTable();
+      const subTotalElement = document.getElementById("sub-total");
+      subTotalElement.innerHTML = "$" + cart.getSubTotal();
+      const deleteBtns = document.querySelectorAll('[id^="remove"]');
+      const decBtns = document.querySelectorAll('[id^="decrement"]');
+      const incBtns = document.querySelectorAll('[id^="increment"]');
+      for (const element of Array.from(deleteBtns)) {
+        element.addEventListener("click", () => {
+          const elementID = element.id.slice(-1);
+          const tableRow = element.parentNode.parentNode;
+          tableRow.remove();
+          updateArrayOnDelete(cart.cartLines[elementID].id);
+          cart.deleteCartLine(elementID);
+          const subTotalElement = document.getElementById("sub-total");
+          subTotalElement.innerHTML = "$" + cart.getSubTotal();
+        });
+      }
+      for (const element of Array.from(decBtns)) {
+        element.addEventListener("click", () => {
+          const elementID = element.id.slice(-1);
+          const cartline = cart.cartLines[elementID];
+          cartline.decrement();
+          if (cartline.quantity !== 0) {
+            const quantityDiv = element.parentNode.parentNode;
+            const inputElement = quantityDiv.querySelector("input");
+            inputElement.value = cartline.quantity;
+            updateArrayOnDecrease(cartline.id);
+          } else {
+            const tableRow = element.parentNode.parentNode.parentNode.parentNode;
+            tableRow.remove();
+            updateArrayOnDelete(cartline.id);
+            cart.deleteCartLine(elementID);
+            
+          }
+          const subTotalElement = document.getElementById("sub-total");
+          subTotalElement.innerHTML = "$" + cart.getSubTotal();
+        });
+      }
+      for (const element of Array.from(incBtns)) {
+        element.addEventListener("click", () => {
+          const elementID = element.id.slice(-1);
+          const cartline = cart.cartLines[elementID];
+          cartline.increment();
           const quantityDiv = element.parentNode.parentNode;
           const inputElement = quantityDiv.querySelector("input");
           inputElement.value = cartline.quantity;
-          localStorage.cart=JSON.stringify(cart.cartLines);
-          upadateCounter();
-        } else {
-          const tableRow = element.parentNode.parentNode.parentNode.parentNode;
-          tableRow.remove();
-          cart.deleteCartLine(elementID);
-
-        }
-        const subTotalElement = document.getElementById("sub-total");
-        subTotalElement.innerHTML = "$" + cart.getSubTotal();
-      });
-    }
-    for (const element of Array.from(incBtns)) {
-      element.addEventListener("click", () => {
-        const elementID = element.id.slice(-1);
-        console.log("elementID",elementID);
-        const cartline = cart.cartLines[elementID];
-        cartline.increment();
-        const quantityDiv = element.parentNode.parentNode;
-        const inputElement = quantityDiv.querySelector("input");
-        inputElement.value = cartline.quantity;
-        localStorage.cart=JSON.stringify(cart.cartLines);
-        upadateCounter();
-        const subTotalElement = document.getElementById("sub-total");
-        subTotalElement.innerHTML = "$" + cart.getSubTotal();
-      });
-    }
-    localStorage.setItem('cart',JSON.stringify(cart.cartLines));
-    
-  });
-})();
-
-/* This code is selecting the HTML element with the ID "checkout-button" and adding an event listener
-to it. When the button is clicked, the code checks if there is a "token" key in the localStorage
-object. If there is no "token" key, the user is redirected to the "login.html" page. If there is a
-"token" key, the user is redirected to the "checkout.html" page. This code is essentially handling
-the logic for the checkout button on the webpage. */
-const checkoutBtn = document.getElementById('checkout-button');
-checkoutBtn.addEventListener('click',()=>{
-  if(!localStorage.token) window.location.href = 'login.html';
-  else window.location.href='checkout.html';
-});
-
-
-/**
- * The function updates the cart counter on a webpage based on the quantity of items in the user's cart
- * stored in local storage.
- */
-function upadateCounter(){
-  let cartArr= JSON.parse(localStorage.getItem("cart"));
-  let updatedCounter=0;  
-  for(let i=0;i<cartArr.length;i++){
-    updatedCounter+=cartArr[i].quantity;
-  }
+          const subTotalElement = document.getElementById("sub-total");
+          subTotalElement.innerHTML = "$" + cart.getSubTotal();
+          updateArrayOnIncrease(cartline.id);
+        });
+      }
+      localStorage.setItem('cart',JSON.stringify(cart.cartLines));
+      console.log(JSON.parse(localStorage.getItem('cart'))[0].quantity);
+    });
+  })();
   
-  document.getElementById('cart-counter').innerHTML = updatedCounter;
-
-}
+  const checkoutBtn = document.getElementById('checkout-button');
+  checkoutBtn.addEventListener('click',()=>{
+    if(!localStorage.token) window.location.href = 'login.html';
+    else window.location.href='checkout.html';
+  });
+  
