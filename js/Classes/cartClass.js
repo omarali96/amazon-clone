@@ -51,9 +51,9 @@ export class Cart {
   getSubTotal() {
     return this.cartLines.reduce((acc, cartLine) => {
       if (cartLine !== null) {
-        return acc + cartLine.getTotalPrice();
+        return parseFloat((acc + cartLine.getTotalPrice()).toFixed(2));
       }
-      return acc;
+      return parseFloat(acc.toFixed(2));
     }, 0);
   }
   displayTable() {

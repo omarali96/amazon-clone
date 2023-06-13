@@ -98,6 +98,7 @@ console.log(cartlines[0].quantity);
   const productsContainer = document.getElementById("products-container");
   productsContainer.innerHTML = `<h6 class="mb-3">Products</h6>`;
   for (const line of cartlines) {
+    if(line === null || line===undefined || line === NaN) continue;
     sum+=line.productDiscounted * line.quantity;
     const productContainer = `<div class="d-flex justify-content-between">
         <p>${line.productName}   x (${line.quantity})</p>

@@ -24,7 +24,7 @@ import { Cart } from "../Classes/cartClass.js";
         const elementID = element.id.slice(-1);
         const cartline = cart.cartLines[elementID];
         cartline.decrement();
-        if (cartline.quantity !== 1) {
+        if (cartline.quantity !== 0) {
           const quantityDiv = element.parentNode.parentNode;
           const inputElement = quantityDiv.querySelector("input");
           inputElement.value = cartline.quantity;

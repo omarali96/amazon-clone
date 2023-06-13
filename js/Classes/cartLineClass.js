@@ -19,7 +19,7 @@ export class CartLine{
       this.quantity++;
     }
     decrement(){
-      this.quantity = Math.max(this.quantity-1,1);
+      this.quantity = Math.max(this.quantity-1,0);
     }
     displayHTML(i){
       return `
