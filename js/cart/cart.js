@@ -84,9 +84,10 @@ fetchCategories()
         addToCartArray = addToCartArray.filter((product)=> product !== ID);
         break;
       }
-      document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length;
     }
     localStorage.addToCartArray = JSON.stringify(addToCartArray);
+    document.getElementById('cart-counter').innerHTML = JSON.parse(localStorage.getItem("addToCartArray")).length;
+
   }
   
   function updateArrayOnDecrease(ID){
