@@ -1,5 +1,6 @@
 import { fetchAPI } from "../utils/fetch_api.js";
 import { Category } from "../Classes/categoryClass.js";
+const cartlines = JSON.parse(localStorage.getItem('cart'));
  // APIs
 
 // logout function
@@ -151,14 +152,39 @@ const getUserInput = () => {
     zipcodeInput: document.getElementById("zipcodeInput").value,
     selectedCountry: selectedOption.text
 };
+const subTotalElement = document.getElementById("sub-total");
+const taxElement = document.getElementById("tax");
+const total = document.getElementById("total");
+const subTotal = subTotalElement.innerHTML;
+const tax = taxElement.innerHTML;
+const totalPrice = total.innerHTML;
+const date = new Date();
+const order_details = [];
+const user_id = localStorage.user_id;
+for(const line of cartlines){
+  const product = {};
+  product.product_id = line.id;
+  product.price = line.productDiscounted;
+  product.qty = line.quantity;
+  order_details.push(product);
+}
   console.log(userData);
   if (validateInput(userData)) {
     if(!localStorage.token) {
-      alert("Please loggin first");
+      alert("Please login first");
+    }
+    const body = {
+      shipping_info:userData,
+      sub_total_price:subTotal,
+      shipping:tax,
+      sub_total_price:totalPrice,
+      user_id:user_id,
+      order_date:date,
+      order_details:order_details
     }
     const res = fetchAPI("http://localhost:5000/api/orders",
      { "Content-Type": "application/json",'x-access-token': localStorage.getItem('token')}
-     , JSON.parse(localStorage.cart),
+     , body,
       "POST");
       console.log(res.status);
     if(res.status === 'success'){
@@ -204,7 +230,7 @@ const handleTax = (sum, option) => {
   total.innerHTML = parseFloat((tax + subTotal).toFixed(2));
 };
 
-const cartlines = JSON.parse(localStorage.getItem('cart'));
+
 let sum = 0;
 console.log(cartlines);
 console.log(cartlines[0].quantity);
