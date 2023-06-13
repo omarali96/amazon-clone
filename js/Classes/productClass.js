@@ -30,7 +30,10 @@ export class Product {
       // this.#discountedPrice = object.discountedPrice;
       this.#discountedPrice = this.#price - this.#discount * this.#price;
     }
-  
+    
+    get id(){
+      return this.#id;
+    }
     get name() {
       return this.#name;
     }

@@ -1,4 +1,32 @@
 import { Cart } from "../Classes/cartClass.js";
+
+function updateArrayOnIncrease(ID){
+  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  addToCartArray.push(ID);
+  localStorage.addToCartArray = JSON.stringify(addToCartArray);
+}
+function updateArrayOnDelete(ID){
+  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  for(const id of addToCartArray){
+    if(id===ID){
+      addToCartArray = addToCartArray.filter((product)=> product === ID);
+      break;
+    }
+  }
+  localStorage.addToCartArray = JSON.stringify(addToCartArray);
+}
+
+function updateArrayOnDecrease(ID){
+  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  for(let i=0;i<addToCartArray.length; i++){
+    if(addToCartArray[i] === ID){
+      addToCartArray.splice(i,1);
+      break;
+    }
+  }
+  localStorage.addToCartArray = JSON.stringify(addToCartArray);
+}
+
 (function () {
   const productArray = JSON.parse(localStorage.getItem("addToCartArray"));
   const cart = new Cart(productArray);
@@ -14,6 +42,7 @@ import { Cart } from "../Classes/cartClass.js";
         const elementID = element.id.slice(-1);
         const tableRow = element.parentNode.parentNode;
         tableRow.remove();
+        updateArrayOnDelete(cart.cartLines[elementID].product.id);
         cart.deleteCartLine(elementID);
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
@@ -28,10 +57,13 @@ import { Cart } from "../Classes/cartClass.js";
           const quantityDiv = element.parentNode.parentNode;
           const inputElement = quantityDiv.querySelector("input");
           inputElement.value = cartline.quantity;
+          updateArrayOnDecrease(cartline.product.id);
         } else {
           const tableRow = element.parentNode.parentNode.parentNode.parentNode;
           tableRow.remove();
+          updateArrayOnDelete(cartline.product.id);
           cart.deleteCartLine(elementID);
+          
         }
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
@@ -47,6 +79,7 @@ import { Cart } from "../Classes/cartClass.js";
         inputElement.value = cartline.quantity;
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
+        updateArrayOnIncrease(cartline.product.id);
       });
     }
     localStorage.setItem('cart',JSON.stringify(cart.cartLines));
