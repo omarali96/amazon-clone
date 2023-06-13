@@ -136,7 +136,7 @@ const clearLocalStorage = ()=>{
  * The function gets user input, validates it, and sends a POST request to a server to place an order
  */
 
-const getUserInput = () => {
+const  getUserInput = async () => {
   const countryInput = document.getElementById("countryInput");
   const selectedIndex = countryInput.selectedIndex;
   const selectedOption = countryInput.options[selectedIndex];
@@ -182,14 +182,17 @@ for(const line of cartlines){
       order_date:date,
       order_details:order_details
     }
-    const res = fetchAPI("http://localhost:5000/api/orders",
-     { "Content-Type": "application/json",'x-access-token': localStorage.getItem('token')}
-     , body,
-      "POST");
-      console.log(res.status);
+    console.log(body);
+    const res = await fetchAPI("http://localhost:5000/api/orders",{ 'x-access-token': localStorage.getItem('token')}
+     , body, "POST");
+      
+      console.log(res);
     if(res.status === 'success'){
       alert('Order is successfully placed.');
-      clearLocalStorage();
+      localStorage.removeItem("cart")
+      localStorage.removeItem("loveCount")
+      localStorage.removeItem("addToCartArray")
+      localStorage.removeItem("user_id")
       window.location.href = 'index.html';
     }else{
       alert('Error! Try again.');
