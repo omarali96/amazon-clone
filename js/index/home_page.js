@@ -20,9 +20,9 @@ import { Product } from "../Classes/productClass.js";
 })();
 
 const APIs = {
-  categories: "http://localhost:5000/api/categories/",
-  featProducts: "http://localhost:5000/api/products/getFeatured",
-  recProducts: "http://localhost:5000/api/products/getRecent",
+  categories: "http://localhost:8000/api/categories/",
+  featProducts: "http://localhost:8000/api/products/getFeatured",
+  recProducts: "http://localhost:8000/api/products/getRecent",
 }; // APIs
 
 

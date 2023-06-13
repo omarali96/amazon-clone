@@ -2,12 +2,17 @@ export class CartLine{
     productName;
     productImage;
     productDiscounted;
+    id;
     quantity;
     constructor(product, quantity){
       this.productName = product.name;
       this.productImage = product.image;
       this.productDiscounted = product.discountedPrice;
+      this.id = product.id
       this.quantity = quantity;
+    }
+    get id(){
+      return this.id;
     }
     get quantity(){
         return this.quantity;

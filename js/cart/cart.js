@@ -1,15 +1,15 @@
 import { Cart } from "../Classes/cartClass.js";
 
 function updateArrayOnIncrease(ID){
-  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  let addToCartArray = JSON.parse(localStorage.addToCartArray);
   addToCartArray.push(ID);
   localStorage.addToCartArray = JSON.stringify(addToCartArray);
 }
 function updateArrayOnDelete(ID){
-  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  let addToCartArray = JSON.parse(localStorage.addToCartArray);
   for(const id of addToCartArray){
     if(id===ID){
-      addToCartArray = addToCartArray.filter((product)=> product === ID);
+      addToCartArray = addToCartArray.filter((product)=> product !== ID);
       break;
     }
   }
@@ -17,7 +17,7 @@ function updateArrayOnDelete(ID){
 }
 
 function updateArrayOnDecrease(ID){
-  const addToCartArray = JSON.parse(localStorage.addToCartArray);
+  let addToCartArray = JSON.parse(localStorage.addToCartArray);
   for(let i=0;i<addToCartArray.length; i++){
     if(addToCartArray[i] === ID){
       addToCartArray.splice(i,1);
@@ -42,7 +42,7 @@ function updateArrayOnDecrease(ID){
         const elementID = element.id.slice(-1);
         const tableRow = element.parentNode.parentNode;
         tableRow.remove();
-        updateArrayOnDelete(cart.cartLines[elementID].product.id);
+        updateArrayOnDelete(cart.cartLines[elementID].id);
         cart.deleteCartLine(elementID);
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
@@ -57,11 +57,11 @@ function updateArrayOnDecrease(ID){
           const quantityDiv = element.parentNode.parentNode;
           const inputElement = quantityDiv.querySelector("input");
           inputElement.value = cartline.quantity;
-          updateArrayOnDecrease(cartline.product.id);
+          updateArrayOnDecrease(cartline.id);
         } else {
           const tableRow = element.parentNode.parentNode.parentNode.parentNode;
           tableRow.remove();
-          updateArrayOnDelete(cartline.product.id);
+          updateArrayOnDelete(cartline.id);
           cart.deleteCartLine(elementID);
           
         }
@@ -79,7 +79,7 @@ function updateArrayOnDecrease(ID){
         inputElement.value = cartline.quantity;
         const subTotalElement = document.getElementById("sub-total");
         subTotalElement.innerHTML = "$" + cart.getSubTotal();
-        updateArrayOnIncrease(cartline.product.id);
+        updateArrayOnIncrease(cartline.id);
       });
     }
     localStorage.setItem('cart',JSON.stringify(cart.cartLines));
