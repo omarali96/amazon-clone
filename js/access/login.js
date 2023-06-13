@@ -40,8 +40,9 @@ async function login(e) {
     let result = await fetchAPI("http://localhost:5000/api/users/login", header, body, "POST");
     // console.log(result);
     if (result) {
-        // store data
+        // store data _id
         localStorage.setItem("token", result.token);
+        localStorage.setItem("user_id", result._id);
         // go to home pages
           window. location. replace("index.html");
     }else{
