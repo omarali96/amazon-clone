@@ -82,36 +82,6 @@ const validateInput = (user) => {
   const stateReg=/[A-Za-z]*$/
   const zipcodeReg = /^[0-9]{5}$/;
   if (
-    //     address1Input
-    // :
-    // "17  Ibrahim Saif from Ali Heiba"
-    // address2Input
-    // :
-    // "asd"
-    // cityInput
-    // :
-    // "Victoria, Alexandria"
-    // emailInput
-    // :
-    // "oamr@gmail.com"
-    // firstNameInput
-    // :
-    // "omar"
-    // lastNameInput
-    // :
-    // "ali"
-    // mobileInput
-    // :
-    // "01012107754"
-    // selectedCountry
-    // :
-    // "Egypt"
-    // stateInput
-    // :
-    // "alex"
-    // zipcodeInput
-    // :
-    // "21628
     nameReg.test(user.firstNameInput) &&
     nameReg.test(user.lastNameInput) &&
     addressReg.test(user.address1Input) &&
